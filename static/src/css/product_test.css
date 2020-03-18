@@ -1,0 +1,57 @@
+.oe_kanban_global_click {
+    width: 350px !important;
+    height: 180px ;
+    min-width: 350px !important;
+    max-width: 360px !important;
+}
+
+.o_kanban_image {
+    width: 160px !important;
+    height: 160px !important;
+}
+
+.kanban_image_box {
+    width: 160px;
+    height: 160px;
+}
+
+.oe_kanban_details {
+    margin-left: 100px !important;
+    width: 70% !important;
+}
+
+.product_name_font {
+    font-size: 15px !important;
+    font-weight: bold !important;
+}
+
+.o_kanban_record_title {
+    width: 160px !important;
+}
+
+.product_code_font {
+    font-size: 12px !important;
+}
+
+.product_price_font {
+    font-size: 12px !important;
+    right: 0px;
+}
+
+.product_price_align {
+    float:right;
+}
+
+.product_location_align {
+    float: right;
+}
+
+.box_position_bottom {
+    position: absolute;
+    top: 100px;
+}
+
+.o_kanban_group {
+    width: 380px !important;
+    margin-right: 10px !important;
+}

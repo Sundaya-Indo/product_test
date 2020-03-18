@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="login_a">
+      <field name="name">login</field>
+      <!-- <field name="model">product.template</field> -->
+      <field name="inherit_id" ref="web.login"/>
+      <field name="arch" type="xml">
+        <xpath expr="//label[@for='login']" position="replace">
+              <label for="login">Username</label>
+        </xpath>
+        <xpath expr="//input[@name='login']" position="replace">
+              <input type="text" placeholder="username" name="login" t-att-value="login" id="login" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off"/>
+        </xpath>
+
+      </field>
+    </record>
+  </data>
+</odoo>
+

@@ -13,7 +13,7 @@
     'views/attachments_tree.xml',
     'views/login.xml',
     'views/edit_inventory.xml',
-    # 'views/contact_template.xml',
+    'views/contact_template.xml',
   ],
   'qweb': [
     # 'static/src/xml/nama_widget.xml',

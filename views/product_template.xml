@@ -12,6 +12,7 @@
           <field name="asset_product"/>
         </xpath>
         <xpath expr="//field[@name='type']" position="before">
+          <field name="long_desc"/>
           <field name="item_type"/>
           <field name="item_brand"/>
         </xpath>

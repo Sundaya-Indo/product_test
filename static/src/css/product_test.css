@@ -55,3 +55,43 @@
     width: 380px !important;
     margin-right: 10px !important;
 }
+
+.o_kanban_image_fill_left {
+    width: 100px !important;
+    margin-top: 3px !important;
+    margin-right: 3px !important;
+    margin-bottom: 3px !important;
+    margin-left: 3px !important;
+}
+
+.oe_kanban_details_contact {
+    margin-left: 3px;
+    margin-top: 3px !important;
+    margin-right: 3px !important;
+    margin-bottom: 3px !important;
+    width: 170px !important;
+}
+
+.oe_partner_heading {
+    font-size: 15px !important;
+    font-weight: bold !important;
+}
+
+.oe_kanban_partner_links {
+    position: absolute;
+    top: 150px;
+}
+
+.contact_detail_bottom {
+    position: absolute;
+    top: 80px; 
+}
+
+.font_email {
+    font-size: 12px;
+}
+
+.o_kanban_image_inner_pic{
+    height: 35px !important;
+    max-height: 35px !important;
+}

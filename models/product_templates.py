@@ -13,6 +13,7 @@ class ProductTemplate(models.Model):
     asset_product = fields.Boolean('Asset', default=False)
     item_type = fields.Char(string='Item Type')
     item_brand = fields.Char(string='Brand')
+    long_desc = fields.Char(string='Description')
     # qr_code = fields.Char(string='QR Code')
 
     # stock_total_value = fields.Float(

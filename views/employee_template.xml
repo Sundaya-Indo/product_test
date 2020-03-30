@@ -20,6 +20,7 @@
                                     <!-- Employee's picture optimized for mobile -->
                                     <div class="o_kanban_image d-md-none rounded-circle" t-attf-style="background-image: url(#{kanban_image('hr.employee', 'image_small', record.id.raw_value)})" role="img"/>
 
+
                                     <div class="oe_kanban_details_employee">
                                         <div class="o_kanban_record_top">
                                             <div align="center" class="o_kanban_record_headings">

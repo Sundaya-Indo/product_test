@@ -14,6 +14,7 @@
     'views/login.xml',
     'views/edit_inventory.xml',
     'views/contact_template.xml',
+    'views/employee_template.xml',
   ],
   'qweb': [
     # 'static/src/xml/nama_widget.xml',

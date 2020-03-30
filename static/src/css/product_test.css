@@ -95,3 +95,11 @@
     height: 35px !important;
     max-height: 35px !important;
 }
+
+.oe_kanban_details_employee{
+    margin-left: 3px;
+    margin-top: 3px !important;
+    margin-right: 3px !important;
+    margin-bottom: 3px !important;
+    width: 170px !important;
+}

@@ -98,8 +98,8 @@
                                     <div class="oe_kanban_partner_links" style="word-break: keep-all;"/>
                                 </div>
                             </div>
-                        </t>Q 
-                    </templates>Q 
+                        </t> 
+                    </templates> 
                 </kanban>
         </xpath>
       </field>

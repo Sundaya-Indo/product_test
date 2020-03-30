@@ -192,6 +192,7 @@
 .o_kanban_image_inner_pic{
     height: 35px !important;
     max-height: 35px !important;
+<<<<<<< HEAD
 }
 
 .oe_kanban_details_employee{
@@ -201,4 +202,6 @@
     margin-bottom: 3px !important;
     width: 170px !important;
 >>>>>>> 2e4377572835aefbd6c397879cc6cd017b135aa6
+=======
+>>>>>>> parent of 2e43775... fix employee
 }

@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data>
-    <!-- <record model="ir.ui.view" id="contact_template">
+    <record model="ir.ui.view" id="contact_template">
       <field name="name">contact.template</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_partner_form"/>
       <field name="arch" type="xml">
-        <xpath expr="//field[@name='vat']" position="after">
-          <field name="is_employee"/>
+        <xpath expr="//field[@name='street']" position="replace">
+            <field name="street" widget="gplaces_address_autocomplete"/>
+        </xpath>
+        <xpath expr="//field[@name='name']" position="replace">
+            <field name="name" widget="gplaces_autocomplete"/>
         </xpath>
       </field>
-    </record> -->
+    </record>
 
     <record model="ir.ui.view" id="contact_template_kanban">
       <field name="name">contact.template.kanban</field>

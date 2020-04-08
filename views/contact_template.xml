@@ -12,6 +12,23 @@
         <xpath expr="//field[@name='name']" position="replace">
             <field name="name" widget="gplaces_autocomplete"/>
         </xpath>
+        <!-- <xpath expr="//field[@name='partner_latitude']" position="replace">
+            <field name="partner_latitude" string="test lat" type="xs:string"/>
+        </xpath> -->
+        <xpath expr="//page[@name='internal_notes']" position="after">
+          <page string="Documentations" name="general_information">
+              <group string="Datas">
+                <tree>
+                  <field name="file_datasheet"/>
+                </tree>
+              </group>
+              <group string="Weblinks">
+                <tree>
+                  <field name="weblinks"/>
+                </tree>
+              </group>
+          </page>
+        </xpath>
       </field>
     </record>
 
@@ -107,5 +124,6 @@
         </xpath>
       </field>
     </record>
+
   </data>
 </odoo>

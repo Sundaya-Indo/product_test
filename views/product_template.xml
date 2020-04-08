@@ -39,7 +39,7 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="product_templates_kanban">
+    <!-- <record model="ir.ui.view" id="product_templates_kanban">
       <field name="name">product.templates.kanban</field>
       <field name="model">product.template</field>
       <field name="inherit_id" ref="product.product_template_kanban_view"/>
@@ -78,13 +78,69 @@
                   <span class="product_location_align product_name_font"><field name="barcode"/></span>
                 </span>
               </div>
-              <!-- <div class="o_kanban_record_title product_price_font">
-                <span>Stock Value : 
-                  <span align="right" widget="monetary" class="product_price_align"><field name="kanban_stock_value"/> <field name="currency_id"/></span>
-                </span>
-              </div> -->
             </div>
           </div>
+        </xpath>
+      </field>
+    </record> -->
+
+    <record model="ir.ui.view" id="product_templates_kanban">
+      <field name="name">product.templates.kanban</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_kanban_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="." position="replace">
+          <kanban>
+            <field name="id"/>
+            <field name="image_small"/>
+            <field name="lst_price"/>
+            <field name="product_variant_count"/>
+            <field name="currency_id"/>
+            <templates>
+              <t t-name="kanban-box">
+                <div class="oe_kanban_global_click">
+                  <div class="o_kanban_image">
+                    <img t-att-src="kanban_image('product.template', 'image', record.id.raw_value)" alt="Product" class="o_kanban_image"/>
+                  </div>
+                  <div class="oe_kanban_details">
+                    <div align="center">
+                      <strong class="o_kanban_record_title product_name_font">
+                        <field name="name"/>
+                      </strong>
+                      <div class="o_kanban_record_title product_code_font">
+                        <field name="item_type"/>
+                      </div>
+                      <div class="o_kanban_record_title product_code_font">
+                        <field name="item_brand"/>
+                      </div>
+                    </div>
+                    <div class="box_position_bottom">
+                      <div class="o_kanban_record_title product_price_font">
+                        <span>Stock :
+                          <span align="right" class="product_price_align"><field name="qty_available"/> <field name="uom_id"/></span>
+                        </span>                 
+                      </div>
+                      <div class="o_kanban_record_title product_price_font">
+                        <span>Price : 
+                          <span align="right" widget="monetary" class="product_price_align"><field name="standard_price"/> <field name="currency_id"/></span>
+                        </span>
+                      </div>
+                      <div class="o_kanban_record_title product_code_font">
+                        <span>Location : 
+                          <span class="product_location_align"><field name="warehouse_id"/></span>
+                        </span>
+                      </div>
+                      <div class="o_kanban_record_title product_code_font">
+                        <span>QR Code : 
+                          <span class="product_location_align product_name_font"><field name="barcode"/></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </t>
+            </templates>
+          </kanban>
         </xpath>
       </field>
     </record>

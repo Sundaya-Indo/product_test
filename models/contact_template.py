@@ -6,15 +6,15 @@ class Partners(models.Model):
 
     # map = fields.Char(Str="map")
 
-    file_datasheet = fields.Many2many(
+    file_datasheet_partner = fields.Many2many(
         comodel_name="ir.attachment",
-        relation="m2m_ir_file_datasheet",
+        relation="m2m_ir_file_datasheet_partner",
         column1="m2m_id",
         column2="attachment_id",
         string="Datasheet File")
 
-    weblinks = fields.Many2many(comodel_name="ir.attachment",
-        relation="m2m_ir_file_weblinks",
+    weblinks_partner = fields.Many2many(comodel_name="ir.attachment",
+        relation="m2m_ir_file_weblinks_partner",
         column1="m2m_id",
         column2="attachment_id",
         string="Weblinks")

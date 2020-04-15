@@ -4,8 +4,6 @@ from odoo.exceptions import UserError
 class Partners(models.Model):
     _inherit = 'res.partner'
 
-    # map = fields.Char(Str="map")
-
     file_datasheet_partner = fields.Many2many(
         comodel_name="ir.attachment",
         relation="m2m_ir_file_datasheet_partner",

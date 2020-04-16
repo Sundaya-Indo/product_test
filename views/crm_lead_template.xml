@@ -23,5 +23,27 @@
                 </xpath>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="crm_lead_template">
+            <field name="name">crm_lead_template</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='lead']" position="before">
+                    <page string="Documentations" name="general_information">
+                        <group string="Datas">
+                            <tree>
+                                <field name="file_datasheet_lead"/>
+                            </tree>
+                        </group>
+                        <group string="Weblinks">
+                            <tree>
+                                <field name="weblinks_lead"/>
+                            </tree>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

@@ -2,3 +2,4 @@ __pycache__
 *.pyc
 models/__pycache__/__init__.cpython-36.pyc
 models/__pycache__/contact_template.cpython-36.pyc
+models/__pycache__/__init__.cpython-36.pyc

@@ -140,7 +140,7 @@
               <group>
                 <!-- <label for="name" class="oe_editonly"/> -->
                 <field name="name" required="0"/>
-                <!-- <field name="is_an_employee"/> -->
+                <field name="is_employee"/>
               </group>
               <group>
                 <!-- <group>
@@ -180,7 +180,7 @@
       </field>
     </record>
 
-    <!-- <record model="ir.ui.view" id="view_res_partner_filter_new">
+    <record model="ir.ui.view" id="view_res_partner_filter_new">
       <field name="name">view_res_partner_filter_new</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_res_partner_filter"/>
@@ -196,7 +196,7 @@
             <filter string="Individuals" name="type_person" domain="[('is_company','=',False)]"/>
             <filter string="Companies" name="type_company" domain="[('is_company','=',True)]"/>
             <separator/>
-            <filter string="Is an Employee" name="is_an_employee" domain="[('is_an_employee','=',True)]"/>
+            <filter string="Is an Employee" name="is_employee" domain="[('is_employee','=',True)]"/>
             <filter string="Customers" name="customer" domain="[('customer','=',True), ('parent_id', '=', False)]"/>
             <filter string="Vendors" name="supplier" domain="[('supplier','=',True), ('parent_id', '=', False)]"/>
             <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
@@ -212,7 +212,7 @@
           </search>
         </xpath>
       </field>
-    </record> -->
+    </record>
 
   </data>
 </odoo>

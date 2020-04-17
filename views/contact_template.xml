@@ -12,9 +12,9 @@
         <xpath expr="//field[@name='name']" position="replace">
             <field name="name" widget="gplaces_autocomplete"/>
         </xpath>
-        <!-- <xpath expr="//field[@name='ref']" position="before">
+        <xpath expr="//field[@name='ref']" position="before">
             <field name="is_employee"/>
-        </xpath> -->
+        </xpath>
         <xpath expr="//page[@name='internal_notes']" position="after">
           <page string="Documentations" name="general_information">
               <group string="Datas">

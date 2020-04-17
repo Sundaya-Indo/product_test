@@ -7,6 +7,8 @@
     # 'nama_modul',
     'stock',
     'purchase',
+    'contacts',
+    'crm',
   ],
   'data': [
     'views/product_template.xml',

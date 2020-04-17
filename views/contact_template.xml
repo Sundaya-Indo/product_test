@@ -13,7 +13,7 @@
             <field name="name" widget="gplaces_autocomplete"/>
         </xpath>
         <xpath expr="//field[@name='ref']" position="before">
-            <field name="is_an_employee"/>
+            <field name="is_employee"/>
         </xpath>
         <xpath expr="//page[@name='internal_notes']" position="after">
           <page string="Documentations" name="general_information">
@@ -125,7 +125,7 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="contact-template">
+    <record model="ir.ui.view" id="contact_template_form_private">
       <field name="name">contact_template</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.res_partner_view_form_private"/>

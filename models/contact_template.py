@@ -17,5 +17,5 @@ class Partners(models.Model):
         column2="attachment_id",
         string="Weblinks")
 
-    is_an_employee = fields.Boolean('Is an Employee', default=False)
+    is_employee = fields.Boolean('Is an Employee', default=False)
     

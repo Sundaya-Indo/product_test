@@ -140,7 +140,7 @@
               <group>
                 <!-- <label for="name" class="oe_editonly"/> -->
                 <field name="name" required="0"/>
-                <field name="is_an_employee"/>
+                <!-- <field name="is_an_employee"/> -->
               </group>
               <group>
                 <!-- <group>

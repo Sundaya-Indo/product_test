@@ -125,8 +125,8 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="view_form_private_new">
-      <field name="name">view_form_private_new</field>
+    <record model="ir.ui.view" id="contact-template">
+      <field name="name">contact_template</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.res_partner_view_form_private"/>
       <field name="arch" type="xml">
@@ -140,7 +140,7 @@
               <group>
                 <!-- <label for="name" class="oe_editonly"/> -->
                 <field name="name" required="0"/>
-                <!-- <field name="is_an_employee"/> -->
+                <field name="is_an_employee"/>
               </group>
               <group>
                 <!-- <group>

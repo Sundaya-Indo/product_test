@@ -180,7 +180,7 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="view_res_partner_filter_new">
+    <!-- <record model="ir.ui.view" id="view_res_partner_filter_new">
       <field name="name">view_res_partner_filter_new</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_res_partner_filter"/>
@@ -212,7 +212,7 @@
           </search>
         </xpath>
       </field>
-    </record>
+    </record> -->
 
   </data>
 </odoo>

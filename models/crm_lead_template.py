@@ -16,3 +16,6 @@ class Leads(models.Model):
         column1="m2m_id",
         column2="attachment_id",
         string="Weblinks")
+
+    marker_color_crm = fields.Char(
+        string='Marker Color', default='red', required=True)

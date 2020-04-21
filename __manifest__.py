@@ -22,7 +22,7 @@
     'views/crm_lead_template.xml',
   ],
   'qweb': [
-    # 'static/src/xml/nama_widget.xml',
+    'static/src/xml/marker_color.xml',
   ],
   'sequence': 3,
   'auto_install': False,

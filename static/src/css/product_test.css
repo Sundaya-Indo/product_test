@@ -104,3 +104,15 @@
     margin-bottom: 3px !important;
     width: 170px !important;
 }
+
+.box_position_bottom_lead {
+    position: absolute;
+    top: 90px;
+    width: 240px;
+}
+
+.o_kanban_lead_record {
+    width: 240px !important;
+}
+
+  

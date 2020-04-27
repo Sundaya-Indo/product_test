@@ -19,3 +19,7 @@ class Leads(models.Model):
 
     marker_color_crm = fields.Char(
         string='Marker Color', default='red', required=True)
+    
+    sales_rep = fields.Many2one('res.partner', 'Sales Representative')
+    technical_sup = fields.Many2one('res.partner', 'Technical Support')
+    referred_by = fields.Many2one('res.partner', 'Referred By')

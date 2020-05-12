@@ -45,7 +45,7 @@
                 </xpath>
                 <xpath expr="//page[@name='geolocalize']" position="inside">
                     <group>
-                        <field name="marker_color_crm" widget="google_marker_picker"/>
+                        <field name="marker_color_crm" widget="selection"/>
                     </group>
                 </xpath>
                 <xpath expr="//page[@name='lead']" position="replace">
@@ -230,9 +230,10 @@
                             domain="[('probability', '&lt;', 100), ('type', '=', 'opportunity')]"
                             help="Open Opportunities"/>
                     <separator/>
-                    <filter string="Site APT" name="color" domain="[('color','=',10)]"/>
+                    <!-- <filter string="Site APT" name="color" domain="[('color','=',10)]"/>
                     <filter string="Site SEI" name="color" domain="[('color','=',11)]"/>
-                    <filter string="Unread Messages" name="message_needaction" domain="[('message_needaction','=',True)]"/>
+                    <filter string="Unread Messages" name="message_needaction" domain="[('message_needaction','=',True)]"/> -->
+                    <!-- <filter string="New Lead" name="marker_color_crm" domain="[('marker_color_crm','=','yellow')]"/> -->
                     <separator/>
                     <filter string="Overdue Opportunities" name="overdue_opp"
                             domain="[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d')), ('date_closed', '=', False)]"

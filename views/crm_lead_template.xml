@@ -233,7 +233,12 @@
                     <!-- <filter string="Site APT" name="color" domain="[('color','=',10)]"/>
                     <filter string="Site SEI" name="color" domain="[('color','=',11)]"/>
                     <filter string="Unread Messages" name="message_needaction" domain="[('message_needaction','=',True)]"/> -->
-                    <!-- <filter string="New Lead" name="marker_color_crm" domain="[('marker_color_crm','=','yellow')]"/> -->
+                    <filter string="New Lead" name="marker_color_crm" domain="[('marker_color_crm','=','yellow')]"/>
+                    <filter string="Official Agent" name="marker_color_crm" domain="[('marker_color_crm','=','red')]"/>
+                    <filter string="Freelance Agent" name="marker_color_crm" domain="[('marker_color_crm','=','orange')]"/>
+                    <filter string="Target Lead" name="marker_color_crm" domain="[('marker_color_crm','=','lime')]"/>
+                    <filter string="Under Construction" name="marker_color_crm" domain="[('marker_color_crm','=','deep-sky-blue')]"/>
+                    <filter string="Operational Site" name="marker_color_crm" domain="[('marker_color_crm','=','blue')]"/>
                     <separator/>
                     <filter string="Overdue Opportunities" name="overdue_opp"
                             domain="[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d')), ('date_closed', '=', False)]"

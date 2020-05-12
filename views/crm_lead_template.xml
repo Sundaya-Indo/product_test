@@ -45,7 +45,7 @@
                 </xpath>
                 <xpath expr="//page[@name='geolocalize']" position="inside">
                     <group>
-                        <field name="marker_color_crm" widget="selection"/>
+                        <field class="dropdown_loc_status" name="marker_color_crm" widget="selection"/>
                     </group>
                 </xpath>
                 <xpath expr="//page[@name='lead']" position="replace">

@@ -2,7 +2,7 @@
 {
   'name': 'Jarvis',
   'author': 'Sundaya IT Team',
-  'version': '1.1.0',
+  'version': '1.1.3',
   'depends': [
     # 'nama_modul',
     'stock',

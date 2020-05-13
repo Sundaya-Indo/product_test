@@ -31,6 +31,6 @@
   'category': 'Enterprise Resource Planning',
   'summary': 'Jarvis System for Sundaya',
   'license': 'OPL-1',
-  'website': 'www.sundaya.com',
+  'website': 'https://github.com/Sundaya-Indo/product_test',
   'description': '-'
 }

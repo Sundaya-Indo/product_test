@@ -24,6 +24,6 @@ class Leads(models.Model):
     technical_sup = fields.Many2one('res.partner', 'Technical Support')
     referred_by = fields.Many2one('res.partner', 'Referred By')
 
-    marker_color_crm = fields.Selection([ ('red', 'Official Agent'),('yellow', 'New Lead'),('orange', 'Freelance Agent'),
-        ('lime', 'Target Lead'),('deep-sky-blue', 'Under Construction'),('blue', 'Operational Site'),],'Location Status', default='red')
+    marker_color_crm = fields.Selection([ ('red', 'Official Agent'),('orange', 'Freelance Agent'),('yellow', 'New Lead'),
+        ('lime', 'Target Lead'),('deep-sky-blue', 'Under Construction'),('blue', 'Operational Site'),],'Location Status', default='yellow')
     

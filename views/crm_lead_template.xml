@@ -29,6 +29,9 @@
             <field name="model">crm.lead</field>
             <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='team_id']" position="after">
+                    <field class="dropdown_loc_status" name="marker_color_crm" widget="selection"/>   
+                </xpath>
                 <xpath expr="//page[@name='lead']" position="before">
                     <page string="Documentations" name="general_information">
                         <group string="Datas">
@@ -45,7 +48,7 @@
                 </xpath>
                 <xpath expr="//page[@name='geolocalize']" position="inside">
                     <group>
-                        <field class="dropdown_loc_status" name="marker_color_crm" widget="selection"/>
+                        <!-- <field class="dropdown_loc_status" name="marker_color_crm" widget="selection"/> -->
                     </group>
                 </xpath>
                 <xpath expr="//page[@name='lead']" position="replace">
@@ -190,6 +193,28 @@
                                                 <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>
                                             </div>
                                         </div>
+                                        <div class="box_position_bottom_lead">
+                                            <div class="o_kanban_lead_record product_price_font">
+                                                <span>Referred By :
+                                                    <span align="right" class="product_price_align"><field name="referred_by"/></span>
+                                                </span>                 
+                                            </div>
+                                            <div class="o_kanban_lead_record product_price_font">
+                                                <span>Lead Entry : 
+                                                    <span align="right" class="product_price_align"><field name="user_id"/></span>
+                                                </span>
+                                            </div>
+                                            <div class="o_kanban_lead_record product_code_font">
+                                                <span>Sales Rep : 
+                                                    <span class="product_location_align"><field name="sales_rep"/></span>
+                                                </span>
+                                            </div>
+                                            <div class="o_kanban_lead_record product_code_font">
+                                                <span>Technical Support : 
+                                                    <span class="product_location_align"><field name="technical_sup"/></span>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="oe_clear"></div>
                                 </div>
@@ -233,9 +258,9 @@
                     <!-- <filter string="Site APT" name="color" domain="[('color','=',10)]"/>
                     <filter string="Site SEI" name="color" domain="[('color','=',11)]"/>
                     <filter string="Unread Messages" name="message_needaction" domain="[('message_needaction','=',True)]"/> -->
-                    <filter string="New Lead" name="marker_color_crm" domain="[('marker_color_crm','=','yellow')]"/>
                     <filter string="Official Agent" name="marker_color_crm" domain="[('marker_color_crm','=','red')]"/>
                     <filter string="Freelance Agent" name="marker_color_crm" domain="[('marker_color_crm','=','orange')]"/>
+                    <filter string="New Lead" name="marker_color_crm" domain="[('marker_color_crm','=','yellow')]"/>                        
                     <filter string="Target Lead" name="marker_color_crm" domain="[('marker_color_crm','=','lime')]"/>
                     <filter string="Under Construction" name="marker_color_crm" domain="[('marker_color_crm','=','deep-sky-blue')]"/>
                     <filter string="Operational Site" name="marker_color_crm" domain="[('marker_color_crm','=','blue')]"/>

@@ -9,3 +9,14 @@ class IrAttachment(models.Model):
     def get_datas(self):
         for item in self:
             item.data = item.datas
+
+    file_extension = fields.Char(string='File Type', compute='check_file')
+
+    @api.onchange('name')
+    def check_file(self):
+        for ext in self:
+            if ext.name:
+                temp = ext.name.split('.')[-1:]
+                ext.file_extension = temp[0]
+            else:
+              pass

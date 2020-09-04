@@ -119,4 +119,14 @@
     width: 200px !important;
 }
 
+.form_image_medium {
+    width: 70px !important;
+    height: 70px !important;
+    margin-right: 8px !important;
+    margin-left: 8px !important;
+}
+
+.title_form_inventory{
+    padding-left: 195px !important;
+}
   

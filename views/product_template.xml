@@ -6,6 +6,9 @@
       <field name="model">product.template</field>
       <field name="inherit_id" ref="product.product_template_only_form_view"/>
       <field name="arch" type="xml">
+      <field name="image_medium" position="after">
+				<field name="qr_code" widget="image" class="oe_avatar form_image_medium"/>
+			</field>
         <xpath expr="//field[@name='barcode']" position="before">
           <field name="sample_product"/>
           <field name="stock_product"/>
@@ -34,7 +37,23 @@
           </page>
         </xpath>
         <xpath expr="//field[@name='barcode']" position="replace">
-          <field name="barcode" string="QR Code"/>
+          <field name="barcode"/>
+        </xpath>
+        <xpath expr="//form/sheet/div[@class='oe_title']" position="replace">
+          <div class="oe_title title_form_inventory">
+            <label class="oe_edit_only" for="name" string="Product Name"/>
+            <h1><field name="name" placeholder="Product Name"/></h1>
+            <div name="options" groups="base.group_user">
+              <div>
+                <field name="sale_ok"/>
+                <label for="sale_ok"/>
+              </div>
+              <div>
+                <field name="purchase_ok"/>
+                <label for="purchase_ok"/>
+              </div>
+            </div>
+          </div>
         </xpath>
       </field>
     </record>
@@ -86,7 +105,7 @@
                         </span>
                       </div>
                       <div class="o_kanban_record_title product_code_font">
-                        <span>QR Code : 
+                        <span>Item Code : 
                           <span class="product_location_align product_name_font"><field name="barcode"/></span>
                         </span>
                       </div>

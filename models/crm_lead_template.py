@@ -27,3 +27,8 @@ class Leads(models.Model):
     marker_color_crm = fields.Selection([ ('red', 'Official Agent'),('orange', 'Freelance Agent'),('yellow', 'New Lead'),
         ('lime', 'Target Lead'),('deep-sky-blue', 'Under Construction'),('blue', 'Operational Site'),],'Location Status', default='yellow')
     
+    bbc_id = fields.Many2one(
+        comodel_name='stock.production.lot',
+        string='BBC Serial'
+        )
+

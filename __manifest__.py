@@ -20,6 +20,8 @@
     'views/employee_template.xml',
     'views/company_template.xml',
     'views/crm_lead_template.xml',
+    'views/mrp_production_views.xml',
+    'views/stock_production_lot_views.xml',
   ],
   'qweb': [
     'static/src/xml/marker_color.xml',

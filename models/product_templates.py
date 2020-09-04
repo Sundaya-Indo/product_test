@@ -3,18 +3,28 @@ from odoo.addons import decimal_precision as dp
 from odoo import models, fields, api, tools, _
 from odoo.exceptions import UserError, ValidationError
 
+import logging
+_logger = logging.getLogger(__name__)
+import base64
+import io
+try:
+    import qrcode
+
+except ImportError:
+    _logger.debug('ImportError')
 
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
+    name = fields.Char('Name', index=True, required=True, translate=True, size=20)
     sample_product = fields.Boolean('Sample', default=True)
     stock_product = fields.Boolean('Stock', default=False)
     asset_product = fields.Boolean('Asset', default=False)
     item_type = fields.Char(string='Item Type')
     item_brand = fields.Char(string='Brand')
     long_desc = fields.Char(string='Description')
-    # qr_code = fields.Char(string='QR Code')
+    barcode = fields.Char(string='Item Code')
 
     # stock_total_value = fields.Float(
     #     digits = dp.get_precision('Product Price'),
@@ -42,6 +52,21 @@ class ProductTemplate(models.Model):
         column1="m2m_id",
         column2="attachment_id",
         string="Weblinks")
+
+    qr_code = fields.Binary('QR Code', compute="_generate_qr_code")
+
+    @api.one
+    @api.depends('barcode')
+    def _generate_qr_code(self):
+        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=20, border=4)
+        if self.barcode :
+            qr.add_data(self.barcode)
+            qr.make(fit=True)
+            img = qr.make_image()
+            buffer = io.BytesIO()
+            img.save(buffer, format="PNG")
+            qrcode_img = base64.b64encode(buffer.getvalue())
+            self.update({'qr_code': qrcode_img,})
 
 
 

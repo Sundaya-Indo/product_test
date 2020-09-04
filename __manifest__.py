@@ -2,13 +2,14 @@
 {
   'name': 'Jarvis',
   'author': 'Sundaya IT Team',
-  'version': '1.1.4',
+  'version': '1.2.0',
   'depends': [
     # 'nama_modul',
     'stock',
     'purchase',
     'contacts',
     'crm',
+    'mrp',
   ],
   'data': [
     'views/product_template.xml',

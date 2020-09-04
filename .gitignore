@@ -6,4 +6,3 @@ models/__pycache__/__init__.cpython-36.pyc
 models/__pycache__/contact_template.cpython-36.pyc
 models/__pycache__/ir_attachment.cpython-36.pyc
 models/__pycache__/product_templates.cpython-36.pyc
-models/stock_production_lots.py

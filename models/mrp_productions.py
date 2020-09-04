@@ -8,5 +8,4 @@ class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
     mrp_qr = fields.Char(string='Item Code', related='product_id.barcode')
-
     barcode = fields.Char(string='Item Code')

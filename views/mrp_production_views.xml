@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <record model="ir.ui.view" id="mrp_production_tree_views">
-            <field name="name">mrp.production.tree.views</field>
+            <field name="name">mrp.production.tree</field>
             <field name="model">mrp.production</field>
             <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
             <field name="arch" type="xml">

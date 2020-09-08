@@ -65,7 +65,7 @@ class ProductionLot(models.Model):
             qrcode_img = base64.b64encode(buffer.getvalue())
             self.update({'qr_code': qrcode_img,})
 
-    product_qr = fields.Char(string='QR Code', related='product_id.barcode')
+    product_qr = fields.Char(string='Item Code', related='product_id.barcode')
 
     @api.depends('refe')
     def _combine_qr_serial(self):

@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <record model="ir.ui.view" id="product_form_easy_views">
-            <field name="name">products.products.view.form.easy</field>
+            <field name="name">product_form_easy_views</field>
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
             <field name="arch" type="xml">

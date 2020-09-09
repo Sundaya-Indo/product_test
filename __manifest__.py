@@ -22,7 +22,7 @@
     'views/company_template.xml',
     'views/crm_lead_template.xml',
     'views/mrp_production_views.xml',
-    # 'views/products_view.xml',
+    'views/products_view.xml',
   ],
   'qweb': [
     'static/src/xml/marker_color.xml',

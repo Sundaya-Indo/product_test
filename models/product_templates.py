@@ -55,20 +55,32 @@ class ProductTemplate(models.Model):
 
     qr_code = fields.Binary('QR Code', compute="_generate_qr_code")
 
+    # @api.one
+    # @api.depends('barcode')
+    # def _generate_qr_code(self):
+    #     qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=20, border=4)
+    #     if self.barcode :
+    #         if self.id is not None:
+    #             qr.add_data(f"{self.barcode}-{self.id}")
+    #             qr.make(fit=True)
+    #             img = qr.make_image()
+    #             buffer = io.BytesIO()
+    #             img.save(buffer, format="PNG")
+    #             qrcode_img = base64.b64encode(buffer.getvalue())
+    #             self.update({'qr_code': qrcode_img,})
+
     @api.one
     @api.depends('barcode')
     def _generate_qr_code(self):
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=20, border=4)
         if self.barcode :
-            if self.id is not None:
-                qr.add_data(f"{self.barcode}-{self.id}")
+                qr.add_data(self.barcode)
                 qr.make(fit=True)
                 img = qr.make_image()
                 buffer = io.BytesIO()
                 img.save(buffer, format="PNG")
                 qrcode_img = base64.b64encode(buffer.getvalue())
                 self.update({'qr_code': qrcode_img,})
-
 
 
 

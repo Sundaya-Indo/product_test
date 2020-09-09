@@ -74,7 +74,8 @@ class ProductTemplate(models.Model):
     def _generate_qr_code(self):
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=20, border=4)
         if self.barcode :
-                qr.add_data(self.barcode)
+            if self.id is not None:
+                qr.add_data(self.barcode+"-"+str(self.id))
                 qr.make(fit=True)
                 img = qr.make_image()
                 buffer = io.BytesIO()

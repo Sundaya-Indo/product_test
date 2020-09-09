@@ -26,7 +26,7 @@
           <page string="Documentations" name="general_information">
               <group string="Datas">
                 <tree>
-                  <field name="file_datasheet"/>
+                  <!-- <field name="file_datasheet"/> -->
                 </tree>
               </group>
               <group string="Weblinks">

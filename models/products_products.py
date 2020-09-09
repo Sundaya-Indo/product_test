@@ -1,5 +1,5 @@
-from odoo import models, fields, api, _
-from odoo.exceptions import UserError
+from odoo import models, fields, api, tools, _
+from odoo.exceptions import UserError, ValidationError
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'

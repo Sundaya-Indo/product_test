@@ -22,7 +22,6 @@
     'views/company_template.xml',
     'views/crm_lead_template.xml',
     'views/mrp_production_views.xml',
-    'views/stock_production_lot_views.xml',
     'views/products_view.xml',
   ],
   'qweb': [

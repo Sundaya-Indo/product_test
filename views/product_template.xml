@@ -101,7 +101,7 @@
                       </div>
                       <div class="o_kanban_record_title product_code_font">
                         <span>Location : 
-                          <span class="product_location_align"><field name="warehouse_id"/></span>
+                          <span class="product_location_align"><field name="rel_warehouse_code"/></span>
                         </span>
                       </div>
                       <div class="o_kanban_record_title product_code_font">

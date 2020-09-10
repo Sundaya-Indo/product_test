@@ -31,7 +31,7 @@ class ProductTemplate(models.Model):
     #     string='Stock Value', compute='hitung', store=True,)
 
     warehouse_id = fields.Many2one('stock.warehouse', 'Warehouse', store=True,)
-
+    rel_warehouse_code = fields.Char(string='Warehouse ID', related='warehouse_id.code')
     # stock_value_ids = fields.Many2one('product.product', 'Value ID')
     # kanban_stock_value = fields.Float(string='Value', related='stock_value_ids.stock_value')
 

@@ -23,6 +23,8 @@
     'views/crm_lead_template.xml',
     'views/mrp_production_views.xml',
     'views/products_view.xml',
+    'report/product_product_templates_inherit.xml',
+    'report/product_template_templates_inherit.xml',
   ],
   'qweb': [
     'static/src/xml/marker_color.xml',

@@ -52,6 +52,10 @@ class ProductTemplate(models.Model):
         column1="m2m_id",
         column2="attachment_id",
         string="Weblinks")
+    
+    # uom_id = fields.Many2one(
+    #     'uom.uom', 'Unit of Measure',
+    #     default=_get_default_uom_id, required=True,)
 
     qr_code = fields.Binary('QR Code', compute="_generate_qr_code")
 
@@ -74,14 +78,13 @@ class ProductTemplate(models.Model):
     def _generate_qr_code(self):
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=20, border=4)
         if self.barcode :
-            if self.id is not None:
-                qr.add_data(self.barcode+"-"+str(self.id))
-                qr.make(fit=True)
-                img = qr.make_image()
-                buffer = io.BytesIO()
-                img.save(buffer, format="PNG")
-                qrcode_img = base64.b64encode(buffer.getvalue())
-                self.update({'qr_code': qrcode_img,})
+            qr.add_data(self.barcode)
+            qr.make(fit=True)
+            img = qr.make_image()
+            buffer = io.BytesIO()
+            img.save(buffer, format="PNG")
+            qrcode_img = base64.b64encode(buffer.getvalue())
+            self.update({'qr_code': qrcode_img,})
 
 
 

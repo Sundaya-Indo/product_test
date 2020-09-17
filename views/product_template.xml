@@ -19,8 +19,15 @@
           <field name="item_type"/>
           <field name="item_brand"/>
         </xpath>
-        <xpath expr="//field[@name='property_stock_production']" position="before">
+        <!-- <xpath expr="//field[@name='property_stock_production']" position="before">
           <field name="warehouse_id"/>
+        </xpath> -->
+        <xpath expr="//group[@name='stock_property']" position="replace">
+          <group string="Counterpart Locations" name="stock_property">
+              <field name="warehouse_id"/>
+              <field name="property_stock_production" domain="[('usage', '=', 'production')]"/>
+              <field name="property_stock_inventory" domain="[('usage', '=', 'inventory')]"/>
+          </group>
         </xpath>
         <xpath expr="//page[@name='variants']" position="before">
           <page string="Documentations" name="general_information">

@@ -68,5 +68,14 @@
                 </xpath>
             </field>
         </record>
+        <!-- <record id="product_normal_form_views" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="." position="replace">
+                    
+                </xpath>
+            </field>
+        </record> -->
     </data>
 </odoo>

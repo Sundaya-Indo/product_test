@@ -19,8 +19,8 @@
           <field name="item_type"/>
           <field name="item_brand"/>
         </xpath>
-        <!-- <xpath expr="//field[@name='property_stock_production']" position="before">
-          <field name="warehouse_id"/>
+        <!-- <xpath expr="//field[@name='uom_id']" position="after">
+          <field name="uom_id_sec"/>
         </xpath> -->
         <xpath expr="//group[@name='stock_property']" position="replace">
           <group string="Counterpart Locations" name="stock_property">

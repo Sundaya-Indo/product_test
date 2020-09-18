@@ -53,7 +53,8 @@
                                         <label for="weight"/>
                                         <div class="o_row">
                                             <field name="weight"/>
-                                            <span><field name="weight_uom_name"/></span>
+                                            <!-- <span><field name="weight_uom_name"/></span> -->
+                                            <span>g</span>
                                         </div>
                                     </group>
                                 </group>
@@ -68,14 +69,55 @@
                 </xpath>
             </field>
         </record>
-        <!-- <record id="product_normal_form_views" model="ir.ui.view">
+
+        <record id="product_product_tree_views" model="ir.ui.view">
             <field name="model">product.product</field>
-            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
             <field name="arch" type="xml">
                 <xpath expr="." position="replace">
-                    
+                    <tree string="Product Variants">
+                        <field name="default_code"/>
+                        <field name="name"/>
+                        <field name="barcode"/>
+                        <field name="attribute_value_ids" widget="many2many_tags" groups="product.group_product_variant"/>
+                        <field name="lst_price"/>
+                        <field name="standard_price"/>
+                        <field name="type" invisible="1"/>
+                        <field name="price" invisible="not context.get('pricelist',False)"/>
+                        <field name="qty_available" />
+                        <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom"/>
+                        <field name="product_tmpl_id" invisible="1"/>
+                        <field name="active" invisible="1"/>
+                        <field name="weight" string="Weight(g)"/>
+                        <field name="price_gram" string="Cost/gram" />
+                        <field name="total_weight" string="Total Weight(g)"/>
+                        <field name="total_value" />
+                    </tree>      
                 </xpath>
             </field>
-        </record> -->
+        </record>
+
+        <record id="product_template_form_views" model="ir.ui.view">
+            <field name="name">product_template_form_views</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page/group/group[@name='group_lots_and_weight']" position="replace">
+                    <group name="group_lots_and_weight" string="Logistics" attrs="{'invisible': [('type', 'not in', ['product', 'consu'])]}">
+                        <label for="weight"/>
+                        <div class="o_row" name="weight">
+                            <field name="weight"/>
+                            <!-- <span><field name="weight_uom_name"/></span> -->
+                            <span>g</span>
+                        </div>
+                        <label for="volume"/>
+                        <div class="o_row" name="volume">
+                            <field name="volume" string="Volume"/>
+                            <span>m³</span>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

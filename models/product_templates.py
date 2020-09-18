@@ -53,9 +53,7 @@ class ProductTemplate(models.Model):
         column2="attachment_id",
         string="Weblinks")
     
-    # uom_id = fields.Many2one(
-    #     'uom.uom', 'Unit of Measure',
-    #     default=_get_default_uom_id, required=True,)
+    # uom_id_sec = fields.Many2one('uom.uom', 'Unit of Measure',)
 
     qr_code = fields.Binary('QR Code', compute="_generate_qr_code")
 

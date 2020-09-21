@@ -1,132 +1,151 @@
 .oe_kanban_global_click {
-    width: 350px !important;
-    height: 180px ;
-    min-width: 350px !important;
-    max-width: 360px !important;
+  width: 350px !important;
+  height: 180px;
+  min-width: 350px !important;
+  max-width: 360px !important;
+}
+@media only screen and (max-width: 767.98px) {
+  [class*="oe_kanban_global_click"] {
+    margin: 12px !important;
+    width: 400px !important;
+    height: 180px;
+    min-width: 400px !important;
+  }
+}
+
+.o_menu_sections {
+  background-color: #7c7bad;
+}
+
+.o_menu_systray {
+  background-color: #7c7bad;
+}
+
+.o_kanban_view {
+  justify-content: space-around !important;
+  padding: 10px !important;
 }
 
 .o_kanban_image {
-    width: 160px !important;
-    height: 160px !important;
+  width: 160px !important;
+  height: 160px !important;
 }
 
 .kanban_image_box {
-    width: 160px;
-    height: 160px;
+  width: 160px;
+  height: 160px;
 }
 
 .oe_kanban_details {
-    margin-left: 100px !important;
-    width: 70% !important;
+  margin-left: 100px !important;
+  width: 70% !important;
 }
 
 .product_name_font {
-    font-size: 15px !important;
-    font-weight: bold !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
 }
 
 .o_kanban_record_title {
-    width: 160px !important;
+  width: 160px !important;
 }
 
 .product_code_font {
-    font-size: 12px !important;
+  font-size: 12px !important;
 }
 
 .product_price_font {
-    font-size: 12px !important;
-    right: 0px;
+  font-size: 12px !important;
+  right: 0px;
 }
 
 .product_price_align {
-    float:right;
+  float: right;
 }
 
 .product_location_align {
-    float: right;
+  float: right;
 }
 
 .box_position_bottom {
-    position: absolute;
-    top: 100px;
+  position: absolute;
+  top: 100px;
 }
 
 .o_kanban_group {
-    width: 380px !important;
-    margin-right: 10px !important;
+  width: 380px !important;
+  margin-right: 10px !important;
 }
 
 .o_kanban_image_fill_left {
-    width: 100px !important;
-    margin-top: 3px !important;
-    margin-right: 3px !important;
-    margin-bottom: 3px !important;
-    margin-left: 3px !important;
+  width: 100px !important;
+  margin-top: 3px !important;
+  margin-right: 3px !important;
+  margin-bottom: 3px !important;
+  margin-left: 3px !important;
 }
 
 .oe_kanban_details_contact {
-    margin-left: 3px;
-    margin-top: 3px !important;
-    margin-right: 3px !important;
-    margin-bottom: 3px !important;
-    width: 170px !important;
-
+  margin-left: 3px;
+  margin-top: 3px !important;
+  margin-right: 3px !important;
+  margin-bottom: 3px !important;
+  width: 170px !important;
 }
 
 .oe_partner_heading {
-    font-size: 15px !important;
-    font-weight: bold !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
 }
 
 .oe_kanban_partner_links {
-    position: absolute;
-    top: 150px;
+  position: absolute;
+  top: 150px;
 }
 
 .contact_detail_bottom {
-    position: absolute;
-    top: 80px; 
+  position: absolute;
+  top: 80px;
 }
 
 .font_email {
-    font-size: 12px;
+  font-size: 12px;
 }
 
-.o_kanban_image_inner_pic{
-    height: 35px !important;
-    max-height: 35px !important;
+.o_kanban_image_inner_pic {
+  height: 35px !important;
+  max-height: 35px !important;
 }
 
-.oe_kanban_details_employee{
-    margin-left: 3px;
-    margin-top: 3px !important;
-    margin-right: 3px !important;
-    margin-bottom: 3px !important;
-    width: 170px !important;
+.oe_kanban_details_employee {
+  margin-left: 3px;
+  margin-top: 3px !important;
+  margin-right: 3px !important;
+  margin-bottom: 3px !important;
+  width: 170px !important;
 }
 
 .box_position_bottom_lead {
-    position: absolute;
-    top: 90px;
-    width: 240px;
+  position: absolute;
+  top: 90px;
+  width: 240px;
 }
 
 .o_kanban_lead_record {
-    width: 240px !important;
+  width: 240px !important;
 }
 
 .dropdown_loc_status {
-    width: 200px !important;
+  width: 200px !important;
 }
 
 .form_image_medium {
-    width: 70px !important;
-    height: 70px !important;
-    margin-right: 8px !important;
-    margin-left: 8px !important;
+  width: 70px !important;
+  height: 70px !important;
+  margin-right: 8px !important;
+  margin-left: 8px !important;
 }
 
-.title_form_inventory{
-    padding-left: 195px !important;
+.title_form_inventory {
+  padding-left: 195px !important;
 }
-  

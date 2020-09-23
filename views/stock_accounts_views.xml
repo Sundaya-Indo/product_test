@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="stock_account_tree2_view">
+            <field name="name">stock_account_tree2_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock_account.view_stock_product_tree2"/>
+            <field name="arch" type="xml">
+                <xpath expr="." position="replace">
+                    <tree>
+                        <field name="image_small" widget="image"/>
+                        <field name="barcode"/>
+                        <field name="display_name"/>
+                        <field name="qty_at_date"/>
+                        <field name="uom_id" groups="uom.group_uom"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="cost_currency_id" invisible="1"/>
+                        <field name="stock_value" sum="Stock Valuation" widget="monetary" options="{'currency_field': 'cost_currency_id'}"/>
+                        <field name="cost_method" invisible="1"/>
+                        <button name="action_valuation_at_date_details" type="object" icon="fa-info-circle" aria-label="Valuation" title="Valuation" attrs="{'invisible': [('cost_method', '!=', 'fifo')]}" />
+                    </tree>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

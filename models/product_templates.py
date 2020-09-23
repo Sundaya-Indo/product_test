@@ -24,8 +24,8 @@ class ProductTemplate(models.Model):
     item_type = fields.Char(string='Item Type')
     item_brand = fields.Char(string='Brand')
     long_desc = fields.Char(string='Description')
-    barcode = fields.Char(string='Item Code', size=6,
-        )
+    barcode = fields.Char(string='Item Code', size=6,)
+        # default= lambda self:_('New'), track_visibility='onchange',)
 
     # stock_total_value = fields.Float(
     #     digits = dp.get_precision('Product Price'),

@@ -4,8 +4,7 @@ from odoo.exceptions import UserError, ValidationError
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    barcode = fields.Char('Item Code', copy=False, oldname='ean13',
-        help="International Article Number used for product identification.")
+    barcode = fields.Char('Item Code', copy=False, oldname='ean13',)
 
     total_weight = fields.Float('Total Weight', compute='generate_total_weight', store=True,)
 
@@ -26,4 +25,8 @@ class ProductProduct(models.Model):
     @api.depends('standard_price', 'weight')
     def generate_price_gram(self):
         for doc in self:
-            doc.price_gram = doc.standard_price / doc.weight
+            if doc.standard_price > 0 and doc.weight > 0:
+                doc.price_gram = doc.standard_price / doc.weight
+            else:
+                pass
+                

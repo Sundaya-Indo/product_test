@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.sequence" id="seq_barcode">
+            <field name="name">barcode_increment</field>
+            <field name="code">barcode.increment</field>
+            <field name="prefix"></field>
+            <field name="padding">1</field>
+        </record>
+    </data>
+</odoo>

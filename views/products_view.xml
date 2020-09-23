@@ -76,7 +76,7 @@
             <field name="arch" type="xml">
                 <xpath expr="." position="replace">
                     <tree string="Product Variants">
-                        <field name="default_code"/>
+                        <field name="default_code" invisible="1"/>
                         <field name="name"/>
                         <field name="barcode"/>
                         <field name="attribute_value_ids" widget="many2many_tags" groups="product.group_product_variant"/>

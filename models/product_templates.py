@@ -24,7 +24,8 @@ class ProductTemplate(models.Model):
     item_type = fields.Char(string='Item Type')
     item_brand = fields.Char(string='Brand')
     long_desc = fields.Char(string='Description')
-    barcode = fields.Char(string='Item Code')
+    barcode = fields.Char(string='Item Code', size=6,
+        default= lambda self:_('New'), track_visibility='onchange', store=True,)
 
     # stock_total_value = fields.Float(
     #     digits = dp.get_precision('Product Price'),
@@ -84,7 +85,13 @@ class ProductTemplate(models.Model):
             qrcode_img = base64.b64encode(buffer.getvalue())
             self.update({'qr_code': qrcode_img,})
 
+    @api.model
+    def create(self, vals):
+            if vals:
+                vals['barcode'] = self.env['ir.sequence'].next_by_code('barcode.increment') or _('New')
+                return super(ProductTemplate, self).create(vals)
 
+    
 
 
 

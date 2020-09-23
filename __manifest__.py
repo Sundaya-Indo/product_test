@@ -25,6 +25,7 @@
     'views/products_view.xml',
     'report/product_product_templates_inherit.xml',
     'report/product_template_templates_inherit.xml',
+    'data/sequence.xml',
   ],
   'qweb': [
     'static/src/xml/marker_color.xml',

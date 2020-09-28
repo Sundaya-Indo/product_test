@@ -5,7 +5,7 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     barcode = fields.Char('Item Code', copy=False, oldname='ean13',)
-    length = fields.Float('Length',)
+    length = fields.Float(string='Length')
     total_length = fields.Float('Total Length', compute='generate_total_length', store=True,)
     price_meter = fields.Float('Price/Meter', compute='generate_price_meter', store=True,)
     total_weight = fields.Float('Total Weight', compute='generate_total_weight', store=True,)

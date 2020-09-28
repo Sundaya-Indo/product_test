@@ -10,6 +10,7 @@
     'contacts',
     'crm',
     'mrp',
+    'hr',
   ],
   'data': [
     'views/product_template.xml',

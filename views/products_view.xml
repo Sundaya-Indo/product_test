@@ -56,6 +56,11 @@
                                             <!-- <span><field name="weight_uom_name"/></span> -->
                                             <span>g</span>
                                         </div>
+                                        <label for="length"/>
+                                        <div class="o_row">
+                                            <field name="length"/>
+                                            <span>m</span>
+                                        </div>
                                     </group>
                                 </group>
                             </group>
@@ -91,6 +96,9 @@
                         <field name="weight" string="Weight(g)"/>
                         <field name="price_gram" string="Cost/gram" />
                         <field name="total_weight" string="Total Weight(g)"/>
+                        <field name="length" string="Length(m)" />
+                        <field name="price_meter" string="Price/meter" />
+                        <field name="total_length" string="Total Length(m)" />
                         <field name="total_value" />
                     </tree>      
                 </xpath>

@@ -11,6 +11,7 @@
     'crm',
     'mrp',
     'hr',
+    'base',
   ],
   'data': [
     'views/product_template.xml',

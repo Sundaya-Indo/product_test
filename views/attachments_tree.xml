@@ -54,7 +54,7 @@
       <xpath expr="." position="replace">
         <tree string="Attachments" limit="4">
           <field name="name"/>
-          <!-- <field name="datas_fname"/> -->
+          <field name="datas_fname" invisible="1"/>
           <field name="description" string="Notes"/>
           <field name="file_extension"/>
           <field name="create_uid"/>

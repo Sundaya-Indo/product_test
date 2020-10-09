@@ -21,10 +21,10 @@
   background-color: #7c7bad;
 }
 
-.o_kanban_view {
+/* .o_kanban_view {
   justify-content: space-around !important;
   padding: 10px !important;
-}
+} */
 
 .o_kanban_image {
   width: 160px !important;

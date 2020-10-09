@@ -29,7 +29,7 @@
     'views/stock_warehouse_view.xml',
     'report/product_product_templates_inherit.xml',
     'report/product_template_templates_inherit.xml',
-    'report/purchase_order_templates_inherit.xml',
+    # 'report/purchase_order_templates_inherit.xml',
     'data/sequence.xml',
   ],
   'qweb': [

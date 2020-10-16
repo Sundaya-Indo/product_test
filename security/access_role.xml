@@ -15,13 +15,13 @@
         <record model="res.groups" id="group_audit_staff">
             <field name="name">Staff</field>
             <field name="category_id" ref="security_role"/>
-            <!-- <field name="implied_ids" eval="[(4, ref('product_test.group_audit_staff'))]"/> -->
+            <field name="implied_ids" eval="[(4, ref('product_test.group_audit_staff'))]"/>
         </record>
 
         <record model="res.groups" id="group_audit_manager">
             <field name="name">Manager</field>
             <field name="category_id" ref="security_role"/>
-            <!-- <field name="implied_ids" eval="[(4, ref('product_test.group_audit_manager'))]"/> -->
+            <field name="implied_ids" eval="[(4, ref('product_test.group_audit_manager'))]"/>
         </record>
 
     </data>

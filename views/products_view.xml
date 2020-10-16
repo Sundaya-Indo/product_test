@@ -80,26 +80,28 @@
             <field name="inherit_id" ref="product.product_product_tree_view"/>
             <field name="arch" type="xml">
                 <xpath expr="." position="replace">
-                    <tree string="Product Variants">
+                    <tree string="Product Variants" editable="top">
+                        <field name="audit_item" invisible="1"/>
                         <field name="default_code" invisible="1"/>
-                        <field name="name"/>
-                        <field name="barcode"/>
-                        <field name="attribute_value_ids" widget="many2many_tags" groups="product.group_product_variant"/>
-                        <field name="lst_price"/>
-                        <field name="standard_price"/>
+                        <field name="image_small" widget="image" readonly="1"/>
+                        <field name="name" readonly="1"/>
+                        <field name="barcode" readonly="1"/>
+                        <field name="attribute_value_ids" widget="many2many_tags" groups="product.group_product_variant" readonly="1"/>
+                        <field name="lst_price" invisible="1"/>
+                        <field name="standard_price" readonly="1"/>
                         <field name="type" invisible="1"/>
                         <field name="price" invisible="not context.get('pricelist',False)"/>
-                        <field name="qty_available" />
-                        <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom"/>
+                        <field name="qty_available" readonly="1" attrs="{'invisible':[('audit_item','=',True)]}" groups="base.group_user"/>
+                        <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom" readonly="1"/>
                         <field name="product_tmpl_id" invisible="1"/>
                         <field name="active" invisible="1"/>
-                        <field name="weight" string="Weight(g)"/>
-                        <field name="price_gram" string="Cost/gram" />
-                        <field name="total_weight" string="Total Weight(g)"/>
+                        <field name="weight" string="Weight(g)" />
+                        <field name="price_gram" string="Cost/gram" readonly="1"/>
+                        <field name="total_weight" string="Total Weight(g)" readonly="1"/>
                         <field name="length" string="Length(m)" />
-                        <field name="price_meter" string="Price/meter" />
-                        <field name="total_length" string="Total Length(m)" />
-                        <field name="total_value" />
+                        <field name="price_meter" string="Price/meter" readonly="1"/>
+                        <field name="total_length" string="Total Length(m)" readonly="1"/>
+                        <field name="total_value" readonly="1"/>
                     </tree>      
                 </xpath>
             </field>
@@ -127,5 +129,103 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="product_audit_tree_views" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="name">Product.audit.tree</field>
+            <field name="arch" type="xml">
+                <tree string="Product Audit" editable="top">
+                    <field name="audit_item" />
+                    <field name="image_small" widget="image" string="Image" readonly="1"/>
+                    <field name="name" readonly="1"/>
+                    <field name="barcode" readonly="1"/>
+                    <field name="attribute_value_ids" widget="many2many_tags" groups="product.group_product_variant" readonly="1"/>
+                    <field name="standard_price" readonly="1"/>
+                    <field name="qty_available" readonly="1" groups="product_test.group_audit_manager"/>
+                    <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom" readonly="1"/>
+                    <field name="total_weight" string="Total Weight(g)" readonly="1"/>
+                    <field name="total_value" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_audit_tree_views2" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="name">Product.audit.tree2</field>
+            <field name="arch" type="xml">
+                <tree string="Product Audit" editable="top">
+                    <field name="audit_item" />
+                    <field name="image_small" widget="image" string="Image" readonly="1"/>
+                    <field name="name" readonly="1"/>
+                    <field name="barcode" readonly="1"/>
+                    <field name="attribute_value_ids" widget="many2many_tags" groups="product.group_product_variant" readonly="1"/>
+                    <field name="audit_qty" />
+                    <field name="qty_available" readonly="1" groups="product_test.group_audit_manager"/>
+                    <field name="qty_dif" groups="product_test.group_audit_manager"/>
+                    <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom" readonly="1"/>
+                    <field name="total_weight" string="Total Weight(g)" readonly="1"/>
+                    <field name="total_value" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_audit_search_view" model="ir.ui.view">
+			<field name="name">product.audit.search.view</field>
+			<field name="model">product.product</field>
+			<field name="arch" type="xml">
+				<search string="Audit Report">
+                    <filter string="Audit" name="audit_item" domain="[('audit_item', '=', True)]"></filter>
+                </search>
+			</field>
+		</record>
+        <record id="product_audit_search_view2" model="ir.ui.view">
+			<field name="name">product.audit.search.view2</field>
+			<field name="model">product.product</field>
+			<field name="arch" type="xml">
+				<search string="Product Audit">
+                <separator/>
+                    <filter string="Audit" name="audit_item" domain="[('audit_item', '=', True)]"></filter>
+                </search>
+			</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="product_audit_action">
+            <field name="name">Product Audit</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="product_audit_tree_views"/>
+            <field name="search_view_id" ref="product_audit_search_view2"></field>
+            <field name="context">{'search_default_audit_item': 0}</field>
+        </record>
+        <record model="ir.actions.act_window" id="product_audit_action2">
+            <field name="name">Audit Report</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,search,form</field>
+            <field name="view_id" ref="product_audit_tree_views2"/>
+            <field name="search_view_id" ref="product_audit_search_view"></field>
+            <field name="context">{'search_default_audit_item': 1}</field>
+        </record>
+
+        <menuitem id="menu_product_audit" 
+            name="Audit" 
+            sequence="4"
+            parent="stock.menu_stock_root" 
+            groups="base.group_user"
+        /> 
+
+        <menuitem id="menu_product_audit1" 
+            name="Product Audit" 
+            sequence="1"
+            parent="menu_product_audit" 
+            action="product_audit_action"
+        />
+
+        <menuitem id="menu_product_audit2" 
+            name="Audit Report" 
+            sequence="1"
+            parent="menu_product_audit" 
+            action="product_audit_action2"
+        />
+
     </data>
 </odoo>

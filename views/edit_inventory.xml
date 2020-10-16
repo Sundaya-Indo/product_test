@@ -4,16 +4,6 @@
     <record model="ir.ui.view" id="edit_inventory">
       <field name="name">edit.inventory</field>
       <field name="model">product.product</field>
-      <field name="inherit_id" ref="product.product_product_tree_view"/>
-      <field name="arch" type="xml">
-        <xpath expr="//field[@name='barcode']" position="replace">
-              <field name="barcode" string="QR Code"/>
-        </xpath>
-      </field>
-    </record>
-    <record model="ir.ui.view" id="edit_inventory">
-      <field name="name">edit.inventory</field>
-      <field name="model">product.product</field>
       <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
       <field name="arch" type="xml">
         <xpath expr="//field[@name='barcode']" position="replace">

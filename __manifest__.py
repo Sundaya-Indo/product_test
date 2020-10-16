@@ -14,6 +14,8 @@
     'base',
   ],
   'data': [
+    'security/access_role.xml',
+    'security/ir.model.access.csv',
     'views/product_template.xml',
     'views/template.xml',
     'views/attachments_tree.xml',

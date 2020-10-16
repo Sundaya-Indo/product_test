@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_menu_audit,access_menu_audit,product_test.model_product_product,base.group_user,1,0,0,0
+product_test_audit_staff,product_test_audit_staff,product_test.model_product_product,product_test.group_audit_staff,1,1,0,0
+product_test_audit_manager,product_test_audit_manager,product_test.model_product_product,product_test.group_audit_manager,1,1,1,1

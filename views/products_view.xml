@@ -218,6 +218,7 @@
             sequence="1"
             parent="menu_product_audit" 
             action="product_audit_action"
+            groups="product_test.group_audit_manager"
         />
 
         <menuitem id="menu_product_audit2" 

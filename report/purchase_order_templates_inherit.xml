@@ -1,39 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <template id="report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+    <template id="report_purchaseorder_document_inherit" inherit_id="purchase.report_purchaseorder_document">
         <xpath expr="//t[@t-call='web.external_layout']" position="replace">
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
                 <t t-set="address">
-                    <div t-field="o.partner_id"
-                    t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
-                    <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
+                    <div style="font-size:13pt">
+                        <span style="font-size:15pt; font-weight:bold;">Vendor:</span>
+                        <div t-field="o.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+                        <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
+                    </div>
                 </t>
-                <t t-set="o.dest_address_id">
+                <t t-if="o.company_id">
                     <t t-set="information_block">
-                        <strong>Deliver to:</strong>
-                        <div t-if="o.dest_address_id">
-                            <div t-field="o.dest_address_id" t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}' name="purchase_shipping_address"/>
+                        <div style="font-size:13pt">
+                            <span style="font-size:15pt; font-weight:bold;">Deliver to:</span>
+                            <div t-if="o.company_id">
+                                <div t-field="o.company_id" t-options='{"fields": ["name"]}'/>
+                            </div>
+                            <div t-if="o.company_id">
+                                <div t-field="o.company_id.street"/>
+                            </div>
+                            <div t-if="o.company_id">
+                                <div t-field="o.company_id.street2"/>
+                            </div>
+                            <div t-if="o.company_id">
+                                <p>
+                                <span t-field="o.company_id.city">
+                                </span>
+                                <span t-field="o.company_id.state_id">
+                                </span>
+                                <span t-field="o.company_id.zip">
+                                </span><br></br>
+                                <span t-field="o.company_id.country_id">
+                                </span>
+                                </p>
+                            </div>
                         </div>
-
                     </t>
                 </t>
-                <p><t t-esc="o.dest_address_id"/></p>
-               
-                <!-- <t t-if="o.company_id">
-                    <div t-if="o.company_id">
-                        <div t-field="o.company_id" t-options='{"fields": ["name", "address", "phone"]}'/>
-                    </div>
-                </t> -->
-                <div class="page">
+
+                <div class="page" style="margin-top:35px; font-size:11.5pt;">
                     <div class="oe_structure"/>
 
-                    <h2 t-if="o.state == 'draft'">Request for Quotation #<span t-field="o.name"/></h2>
-                    <h2 t-if="o.state in ['sent', 'to approve']">Purchase Order #<span t-field="o.name"/></h2>
-                    <h2 t-if="o.state in ['purchase', 'done']">Purchase Order Confirmation #<span t-field="o.name"/></h2>
-                    <h2 t-if="o.state == 'cancel'">Cancelled Purchase Order #<span t-field="o.name"/></h2>
+                    <h2 t-if="o.state == 'draft'">Request for Quotation <span t-field="o.name"/></h2>
+                    <h2 t-if="o.state in ['sent', 'to approve']">Purchase Order <span t-field="o.name"/></h2>
+                    <h2 t-if="o.state in ['purchase', 'done']">Purchase Order <span t-field="o.name"/></h2>
+                    <h2 t-if="o.state == 'cancel'">Cancelled Purchase Order <span t-field="o.name"/></h2>
 
-                        <div id="informations" class="row mt32 mb32">
+                        <div id="informations" class="row mt32 mb32" style="font-size:13pt;">
                             <div t-if="o.name" class="col-3 bm-2">
                                 <strong>Our Order Reference:</strong>
                                 <p t-field="o.name" class="m-0"/>
@@ -46,14 +62,23 @@
                                 <strong>Order Date:</strong>
                                 <p t-field="o.date_order" class="m-0"/>
                             </div>
+                            <div t-if="o.payment_term_id" class="col-3 bm-2">
+                                <strong>Payment Terms:</strong>
+                                <p t-field="o.payment_term_id" class="m-0"/>
+                            </div>
+                            <div t-if="o.shipping_mode" class="col-3 bm-2">
+                                <strong>Shipping Mode:</strong>
+                                <p t-field="o.shipping_mode" class="m-0"/>
+                            </div>
                         </div>
 
                         <table class="table table-sm o_main_table">
                             <thead>
                                 <tr>
+                                    <th><strong>Item Code</strong></th>
                                     <th><strong>Description</strong></th>
                                     <th><strong>Taxes</strong></th>
-                                    <th class="text-center"><strong>Date Req.</strong></th>
+                                    <!-- <th class="text-center"><strong>Date Req.</strong></th> -->
                                     <th class="text-right"><strong>Qty</strong></th>
                                     <th class="text-right"><strong>Unit Price</strong></th>
                                     <th class="text-right"><strong>Amount</strong></th>
@@ -62,14 +87,17 @@
                             <tbody>
                                 <tr t-foreach="o.order_line" t-as="line">
                                     <td>
+                                        <span t-field="o.product_id.barcode"/>
+                                    </td>
+                                    <td>
                                         <span t-field="line.name"/>
                                     </td>
                                     <td>
                                         <span t-esc="', '.join(map(lambda x: x.name, line.taxes_id))"/>
                                     </td>
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                         <span t-field="line.date_planned"/>
-                                    </td>
+                                    </td> -->
                                     <td class="text-right">
                                         <span t-field="line.product_qty"/>
                                         <span t-field="line.product_uom.name" groups="uom.group_uom"/>
@@ -116,6 +144,20 @@
                     <p t-field="o.notes"/>
                     <div class="oe_structure"/>
                 </div>
+                <div class="box_content" style="position: relative; margin-top:30px;">
+                    <div class="box_side left" style="padding: 5px 10px; margin: 0 5px; text-align: left; font-size: 12pt; position: absolute; min-width: 250px; top: 0;left: 0;">
+                        <div>Prepared by</div>
+                        <div t-if="o.user_id" style="width:100%; margin-top:55px;">
+                            <p style="border-bottom:2px solid #000;" t-field="o.user_id"></p>
+                        </div>
+                    </div>
+                    <div class="box_side right" style="padding: 5px 10px; margin: 0 5px; text-align: left; font-size: 12pt; position: absolute; min-width: 250px; right: 0;top: 0;">
+                        <div>Approved by</div>
+                        <div t-if="o.res_user_id" style="width:100%; margin-top:55px;">
+                            <p style="border-bottom:2px solid #000;" t-field="o.res_user_id"></p>
+                        </div>
+                    </div>
+                </div>           
             </t>
         </xpath>
     </template>

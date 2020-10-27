@@ -8,3 +8,4 @@ from . import stock_moves
 from . import products_products
 from . import res_currency_inherit
 from . import purchases
+from . import res_users_inherit

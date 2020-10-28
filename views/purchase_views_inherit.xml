@@ -8,6 +8,10 @@
                 <xpath expr="//field[@name='date_order']" position="after">
                     <field name="shipping_mode" />
                     <field name="res_user_id" string="Approved by" />
+                    <field name="current_user" invisible="1"/>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel']" position="before">
+                    <button string="Sign" name="sign_po" type="object" class="oe_highlight"/>
                 </xpath>
             </field>
         </record>

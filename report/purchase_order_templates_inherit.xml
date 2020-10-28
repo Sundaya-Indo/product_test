@@ -149,13 +149,14 @@
                         <div>Prepared by</div>
                         <img t-if="o.user_id.signature_image" t-att-src="image_data_uri(o.user_id.signature_image)" style="height:130px;"/>
                         <div t-if="o.user_id" style="width:100%;">
-                            <span style="border-bottom:2px solid #000;" t-field="o.user_id">
-                            </span>
+                            <p style="border-bottom:2px solid #000;" t-field="o.user_id">
+                            </p>
                         </div>
                     </div>
                     <div class="box_side right" style="padding: 5px 10px; margin: 0 5px; text-align: left; font-size: 12pt; position: absolute; min-width: 250px; right: 0;top: 0;">
                         <div>Approved by</div>
-                        <div t-if="o.res_user_id" style="width:100%; margin-top:55px;">
+                        <img t-if="o.res_user_id.signature_image" t-att-src="image_data_uri(o.res_user_id.signature_image)" style="height:130px;"/>
+                        <div t-if="o.res_user_id" style="width:100%;">
                             <p style="border-bottom:2px solid #000;" t-field="o.res_user_id"></p>
                         </div>
                     </div>

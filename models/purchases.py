@@ -12,7 +12,7 @@ class PurchaseOrder(models.Model):
     @api.multi
     def sign_po(self):
         for doc in self:
-            if doc.state == 'draft':
+            if doc.state == 'draft' or doc.state == 'purchase':
                 temp = self.env.uid
                 doc.res_user_id = temp
             else:

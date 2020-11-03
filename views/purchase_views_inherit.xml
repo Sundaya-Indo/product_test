@@ -11,7 +11,7 @@
                     <field name="current_user" invisible="1"/>
                 </xpath>
                 <xpath expr="//button[@name='button_cancel']" position="before">
-                    <button string="Sign" name="sign_po" type="object" class="oe_highlight"/>
+                    <button string="Sign" name="sign_po" type="object" class="oe_highlight" groups="purchase.group_purchase_manager"/>
                 </xpath>
             </field>
         </record>

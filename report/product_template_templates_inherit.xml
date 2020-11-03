@@ -13,4 +13,55 @@
             </div>
         </xpath>
     </template>
+
+    <template id="report_item_list">
+        <div>
+            <table class="table table-sm o_main_table">
+                <thead>
+                    <tr>
+                        <th><strong>Image</strong></th>
+                        <th><strong>Item Code</strong></th>
+                        <th><strong>Name</strong></th>
+                        <th><strong>Att Values</strong></th>
+                        <th><strong>Stock</strong></th>
+                        <th><strong>Cost</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="docs" t-as="i">
+                        <td>
+                            <img t-if="i.image_small" t-att-src="image_data_uri(i.image_small)"/>
+                        </td>
+                        <td>
+                            <span t-field="i.barcode"/>
+                        </td>
+                        <td>
+                            <span t-field="i.name"/>
+                        </td>
+                        <!-- <td t-foreach="i.attribute_value_ids" t-as="line">
+                            <span t-field="line.name"/>
+                        </td> -->
+                        <td>
+                            <span t-field="i.attribute_value_ids" style="width:70%;"/>
+                        </td>
+                        <td>
+                            <span t-field="i.qty_available"/> <span t-field="i.uom_id"/>
+                        </td>
+                        <td>
+                            <span t-field="i.standard_price"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <template id="report_itemlist">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <t t-call="product_test.report_item_list">
+                </t>
+            </div>
+        </t>
+    </template>
 </odoo>

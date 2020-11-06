@@ -57,4 +57,21 @@ class ProductProduct(models.Model):
 
 
 
+class ProductAudit(models.Model):
+    _name = 'product.audit'
+
+    name = fields.Char('Audit No')
+
+    state = fields.Selection([
+            ('draft', 'Draft'),
+            ('open', 'Open'),
+            ('done', 'Done'),
+            ('cancel', 'Cancel')
+        ], string='Status', default='draft')
+
+    @api.multi
+    def button_approve(self, force=False):
+        self.write({'state': 'open', 'date_approve': fields.Date.context_today(self)})
+        return {}
+
                 

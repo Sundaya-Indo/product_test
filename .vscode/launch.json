@@ -1,0 +1,26 @@
+// -- ------------------------------------
+// -- Perhatian
+// -- Khusus untuk Windows User : 
+// -- hasil dari Copy Path harus diganti dengan double-backslash \\
+// -- ------------------------------------
+{
+    "version": "0.2.0",
+    "configurations": [   
+        {
+            "name": "Run Odoo",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "console": "integratedTerminal",
+            "pythonPath": "C:/Program Files (x86)/Odoo 12.0/python/python.exe",
+            "program": "C:/Program Files (x86)/Odoo 12.0/server/odoo-bin",
+            "args": [
+                "--config=D:\\jarvis\\ikea\\server.conf",
+                // "--config=C:\\Program Files (x86)\\Odoo 12.0\\server\\odoo.conf",
+                "--addons-path=D:\\jarvis\\sundaya",
+                // "--database=test",
+                "--update=product_test"
+            ]
+        }
+    ]
+}

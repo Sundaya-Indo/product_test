@@ -130,7 +130,7 @@
             </field>
         </record>
 
-        <record id="product_audit_tree_views" model="ir.ui.view">
+        <!-- <record id="product_audit_tree_views" model="ir.ui.view">
             <field name="model">product.product</field>
             <field name="name">Product.audit.tree</field>
             <field name="arch" type="xml">
@@ -147,9 +147,9 @@
                     <field name="total_value" readonly="1"/>
                 </tree>
             </field>
-        </record>
+        </record> -->
 
-        <record id="product_audit_tree_views2" model="ir.ui.view">
+        <!-- <record id="product_audit_tree_views2" model="ir.ui.view">
             <field name="model">product.product</field>
             <field name="name">Product.audit.tree2</field>
             <field name="arch" type="xml">
@@ -167,9 +167,9 @@
                     <field name="total_value" readonly="1"/>
                 </tree>
             </field>
-        </record>
+        </record> -->
 
-        <record id="product_audit_search_view" model="ir.ui.view">
+        <!-- <record id="product_audit_search_view" model="ir.ui.view">
 			<field name="name">product.audit.search.view</field>
 			<field name="model">product.product</field>
 			<field name="arch" type="xml">
@@ -177,8 +177,8 @@
                     <filter string="Audit" name="audit_item" domain="[('audit_item', '=', True)]"></filter>
                 </search>
 			</field>
-		</record>
-        <record id="product_audit_search_view2" model="ir.ui.view">
+		</record> -->
+        <!-- <record id="product_audit_search_view2" model="ir.ui.view">
 			<field name="name">product.audit.search.view2</field>
 			<field name="model">product.product</field>
 			<field name="arch" type="xml">
@@ -187,45 +187,99 @@
                     <filter string="Audit" name="audit_item" domain="[('audit_item', '=', True)]"></filter>
                 </search>
 			</field>
-		</record>
+		</record> -->
 
-        <record model="ir.actions.act_window" id="product_audit_action">
+        <record id="product_audit_tree_view" model="ir.ui.view">
+            <field name="name">product.audit.tree.view</field>
+            <field name="model">product.audit</field>
+            <field name="arch" type="xml">
+                <tree string="Product Audit">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_audit_form_view" model="ir.ui.view">
+            <field name="name">product.audit.form.view</field>
+            <field name="model">product.audit</field>
+            <field name="arch" type="xml">
+                <form string="Product Audit">
+                    <header>
+                        <button name="button_approve" type="object" states='draft' string="Approve Order" class="oe_highlight" groups="purchase.group_purchase_manager"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <span class="o_form_label" attrs="{'invisible': [('state','not in',('draft','open'))]}">Audit Draft </span>
+                            <span class="o_form_label" attrs="{'invisible': [('state','in',('draft', 'open'))]}">Audit Order </span>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- <record model="ir.actions.act_window" id="product_audit_action">
             <field name="name">Product Audit</field>
             <field name="res_model">product.product</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="product_audit_tree_views"/>
             <field name="search_view_id" ref="product_audit_search_view2"></field>
             <field name="context">{'search_default_audit_item': 0}</field>
-        </record>
-        <record model="ir.actions.act_window" id="product_audit_action2">
+        </record> -->
+        <!-- <record model="ir.actions.act_window" id="product_audit_action2">
             <field name="name">Audit Report</field>
             <field name="res_model">product.product</field>
             <field name="view_mode">tree,search,form</field>
             <field name="view_id" ref="product_audit_tree_views2"/>
             <field name="search_view_id" ref="product_audit_search_view"></field>
             <field name="context">{'search_default_audit_item': 1}</field>
+        </record> -->
+        <record model="ir.actions.act_window" id="product_audit_action_form">
+            <field name="name">Product Audit Form</field>
+            <field name="res_model">product.audit</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="product_audit_tree_view"/>
+            <!-- <field name="search_view_id" ref="product_audit_search_view"></field> -->
+            <field name="context">{'search_default_audit_item': 0}</field>
         </record>
 
-        <menuitem id="menu_product_audit" 
+        <!-- <menuitem id="menu_product_audit" 
             name="Audit" 
             sequence="4"
             parent="stock.menu_stock_root" 
             groups="base.group_user"
-        /> 
+        />  -->
 
-        <menuitem id="menu_product_audit1" 
+        <menuitem id="menu_inv_product_audit" 
+            name="Audit" 
+            sequence="5"
+            parent="stock.menu_stock_root" 
+            groups="base.group_user"
+        />
+
+        <!-- <menuitem id="menu_product_audit1" 
             name="Product Audit" 
-            sequence="1"
+            sequence="10"
             parent="menu_product_audit" 
             action="product_audit_action"
             groups="product_test.group_audit_manager"
-        />
+        /> -->
 
-        <menuitem id="menu_product_audit2" 
+        <!-- <menuitem id="menu_product_audit2" 
             name="Audit Report" 
-            sequence="1"
+            sequence="20"
             parent="menu_product_audit" 
             action="product_audit_action2"
+        /> -->
+
+        <menuitem id="menu_product_audit_form"
+            name="Product Audit"
+            sequence="30"
+            parent="menu_inv_product_audit"
+            action="product_audit_action_form"
         />
 
     </data>

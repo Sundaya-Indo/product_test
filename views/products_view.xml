@@ -29,6 +29,7 @@
                                 <group name="inventory" string="Inventory">
                                     <field name="qty_available" string="Quantity on Hand"/>
                                     <field name="warehouse_id" string="Warehouse"/>
+                                    <!-- <field name="last_product_audit"/> -->
                                 </group>
                                 <group>
                                     <field name="active"/>
@@ -130,65 +131,6 @@
             </field>
         </record>
 
-        <!-- <record id="product_audit_tree_views" model="ir.ui.view">
-            <field name="model">product.product</field>
-            <field name="name">Product.audit.tree</field>
-            <field name="arch" type="xml">
-                <tree string="Product Audit" editable="top">
-                    <field name="audit_item" />
-                    <field name="image_small" widget="image" string="Image" readonly="1"/>
-                    <field name="name" readonly="1"/>
-                    <field name="barcode" readonly="1"/>
-                    <field name="attribute_value_ids" widget="many2many_tags" groups="product.group_product_variant" readonly="1"/>
-                    <field name="standard_price" readonly="1"/>
-                    <field name="qty_available" readonly="1" groups="product_test.group_audit_manager"/>
-                    <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom" readonly="1"/>
-                    <field name="total_weight" string="Total Weight(g)" readonly="1"/>
-                    <field name="total_value" readonly="1"/>
-                </tree>
-            </field>
-        </record> -->
-
-        <!-- <record id="product_audit_tree_views2" model="ir.ui.view">
-            <field name="model">product.product</field>
-            <field name="name">Product.audit.tree2</field>
-            <field name="arch" type="xml">
-                <tree string="Product Audit" editable="top">
-                    <field name="audit_item" />
-                    <field name="image_small" widget="image" string="Image" readonly="1"/>
-                    <field name="name" readonly="1"/>
-                    <field name="barcode" readonly="1"/>
-                    <field name="attribute_value_ids" widget="many2many_tags" groups="product.group_product_variant" readonly="1"/>
-                    <field name="audit_qty" />
-                    <field name="qty_available" readonly="1" groups="product_test.group_audit_manager"/>
-                    <field name="qty_dif" groups="product_test.group_audit_manager"/>
-                    <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom" readonly="1"/>
-                    <field name="total_weight" string="Total Weight(g)" readonly="1"/>
-                    <field name="total_value" readonly="1"/>
-                </tree>
-            </field>
-        </record> -->
-
-        <!-- <record id="product_audit_search_view" model="ir.ui.view">
-			<field name="name">product.audit.search.view</field>
-			<field name="model">product.product</field>
-			<field name="arch" type="xml">
-				<search string="Audit Report">
-                    <filter string="Audit" name="audit_item" domain="[('audit_item', '=', True)]"></filter>
-                </search>
-			</field>
-		</record> -->
-        <!-- <record id="product_audit_search_view2" model="ir.ui.view">
-			<field name="name">product.audit.search.view2</field>
-			<field name="model">product.product</field>
-			<field name="arch" type="xml">
-				<search string="Product Audit">
-                <separator/>
-                    <filter string="Audit" name="audit_item" domain="[('audit_item', '=', True)]"></filter>
-                </search>
-			</field>
-		</record> -->
-
         <record id="product_audit_tree_view" model="ir.ui.view">
             <field name="name">product.audit.tree.view</field>
             <field name="model">product.audit</field>
@@ -206,37 +148,64 @@
                 <form string="Product Audit">
                     <header>
                         <button name="button_approve" type="object" states='draft' string="Approve Order" class="oe_highlight" groups="purchase.group_purchase_manager"/>
-                        <field name="state" widget="statusbar" statusbar_visible="draft,open,done"/>
+                        <button name="button_done" type="object" states='open' string="Finish Audit" class="oe_highlight" groups="purchase.group_purchase_manager"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,done" clickable="True"/>
                     </header>
                     <sheet>
                         <div class="oe_title">
-                            <span class="o_form_label" attrs="{'invisible': [('state','not in',('draft','open'))]}">Audit Draft </span>
-                            <span class="o_form_label" attrs="{'invisible': [('state','in',('draft', 'open'))]}">Audit Order </span>
+                            <span class="o_form_label" attrs="{'invisible': [('state','not in',('draft'))]}">Audit Draft </span>
+                            <span class="o_form_label" attrs="{'invisible': [('state','in',('draft'))]}">Audit Order </span>
                             <h1>
                                 <field name="name"/>
                             </h1>
                         </div>
+                        <group>
+                            <group>
+                                <field name="partner_id" domain="[('is_employee','=',True)]"/>
+                                <field name="company_id" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="audit_date_order"/>
+                                <field name="user_id" />
+                                <field name="date_done" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Product">
+                                <field name="order_line" attrs="{'readonly': [('state', 'in', ('done', 'cancel'))]}">
+                                    <tree string="Purchase Order Lines" editable="bottom">
+                                        <field name="state" invisible="1"/>
+                                        <field name="image_small_id" widget="image" class="oe_avatar"/>
+                                        <field name="item_code" />
+                                        <field name="product_id" attrs="{'readonly': [('state', 'in', ('open','done', 'cancel'))]}" force_save="1"/>
+                                        <field name="name" invisible="1"/>
+                                        <field name="product_qty"/>
+                                        <field name="product_uom" attrs="{'readonly': [('state', 'in', ('open', 'done', 'cancel'))]}" force_save="1"/>
+                                        <field name="audit_qty"/>
+                                        <field name="difference_qty" />
+                                        <field name="last_audit_date"/>
+                                        <field name="rel_date_done"/>
+                                        <field name="days_difference" invisible="1"/>
+                                        <field name="last_audited"/>
+                                    </tree>
+                                    <form string="Product Audit Line">
+                                        <sheet>
+                                
+                                        </sheet>
+                                    </form>
+                                </field>                       
+                            </page>
+                        </notebook>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
                 </form>
             </field>
         </record>
-
-        <!-- <record model="ir.actions.act_window" id="product_audit_action">
-            <field name="name">Product Audit</field>
-            <field name="res_model">product.product</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="product_audit_tree_views"/>
-            <field name="search_view_id" ref="product_audit_search_view2"></field>
-            <field name="context">{'search_default_audit_item': 0}</field>
-        </record> -->
-        <!-- <record model="ir.actions.act_window" id="product_audit_action2">
-            <field name="name">Audit Report</field>
-            <field name="res_model">product.product</field>
-            <field name="view_mode">tree,search,form</field>
-            <field name="view_id" ref="product_audit_tree_views2"/>
-            <field name="search_view_id" ref="product_audit_search_view"></field>
-            <field name="context">{'search_default_audit_item': 1}</field>
-        </record> -->
+        
         <record model="ir.actions.act_window" id="product_audit_action_form">
             <field name="name">Product Audit Form</field>
             <field name="res_model">product.audit</field>
@@ -246,34 +215,12 @@
             <field name="context">{'search_default_audit_item': 0}</field>
         </record>
 
-        <!-- <menuitem id="menu_product_audit" 
-            name="Audit" 
-            sequence="4"
-            parent="stock.menu_stock_root" 
-            groups="base.group_user"
-        />  -->
-
         <menuitem id="menu_inv_product_audit" 
             name="Audit" 
             sequence="5"
             parent="stock.menu_stock_root" 
             groups="base.group_user"
         />
-
-        <!-- <menuitem id="menu_product_audit1" 
-            name="Product Audit" 
-            sequence="10"
-            parent="menu_product_audit" 
-            action="product_audit_action"
-            groups="product_test.group_audit_manager"
-        /> -->
-
-        <!-- <menuitem id="menu_product_audit2" 
-            name="Audit Report" 
-            sequence="20"
-            parent="menu_product_audit" 
-            action="product_audit_action2"
-        /> -->
 
         <menuitem id="menu_product_audit_form"
             name="Product Audit"

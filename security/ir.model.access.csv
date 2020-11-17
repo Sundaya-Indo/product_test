@@ -5,5 +5,6 @@ product_test_audit_manager,product_test_audit_manager,product_test.model_product
 access_main_menu_audit,access_main_menu_audit,product_test.model_product_audit,base.group_user,1,0,0,0
 product_test_audit_staff_form,product_test_audit_staff_form,product_test.model_product_audit,product_test.group_audit_staff,1,1,0,0
 product_test_audit_manager_form,product_test_audit_manager_form,product_test.model_product_audit,product_test.group_audit_manager,1,1,1,1
+product_test_audit_order_manager_form,product_test_audit_order_manager_form,product_test.model_product_audit_line,product_test.group_audit_manager,1,1,1,1
 
 

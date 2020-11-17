@@ -7,7 +7,7 @@
       <field name="inherit_id" ref="product.product_template_only_form_view"/>
       <field name="arch" type="xml">
       <field name="image_medium" position="after">
-				<field name="qr_code" widget="image" class="oe_avatar form_image_medium"/>
+				<field name="qr_code" widget="image" class="oe_avatar"/>
 			</field>
         <xpath expr="//field[@name='barcode']" position="before">
           <field name="sample_product"/>
@@ -27,6 +27,12 @@
               <field name="warehouse_id"/>
               <field name="property_stock_production" domain="[('usage', '=', 'production')]"/>
               <field name="property_stock_inventory" domain="[('usage', '=', 'inventory')]"/>
+          </group>
+        </xpath>
+        <xpath expr="//group[@name='stock_property']" position="after">
+          <group string="Audit" name="audit_property">
+            <field name="audit_id"/>
+            <field name="rel_audit_done"/>
           </group>
         </xpath>
         <xpath expr="//page[@name='variants']" position="before">

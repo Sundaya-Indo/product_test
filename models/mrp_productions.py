@@ -9,3 +9,4 @@ class MrpProduction(models.Model):
 
     mrp_qr = fields.Char(string='Item Code', related='product_id.barcode')
     barcode = fields.Char(string='Item Code')
+    image_small_id = fields.Binary(related='product_id.image_small', string='Image', compute='_compute_images', inverse='_set_image_small')

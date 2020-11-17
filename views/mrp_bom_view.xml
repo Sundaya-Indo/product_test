@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="mrp_bom_form_views">
+            <field name="name">mrp.bom.form</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_tmpl_id']" position="before">
+                    <div>
+                        <field name="image_small_id" widget="image" class="oe_avatar"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='bom_line_ids']" position="replace">
+                    <field name="bom_line_ids" widget="one2many_list" context="{'default_parent_product_tmpl_id': product_tmpl_id}">
+                        <tree string="Components" editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="image_small_id" widget="image"/>
+                            <field name="product_id" context="{'default_type': 'product'}"/>
+                            <field name="has_attachments" invisible="1"/>
+                            <button name="action_see_attachments" type="object" icon="fa-files-o" attrs="{'invisible': [('has_attachments', '=', True)]}" aria-label="No attachment" title="No attachment"/>
+                            <button name="action_see_attachments" type="object" icon="fa-file" attrs="{'invisible': [('has_attachments', '=', False)]}" aria-label="Attachments" title="Attachments"/>
+                            <field name="product_qty"/>
+                            <field name="parent_product_tmpl_id" invisible="1" />
+                            <field name="valid_product_attribute_value_ids" invisible="1"/>
+                            <field name="product_uom_id" options="{'no_open':True,'no_create':True}" groups="uom.group_uom"/>
+                            <field name="attribute_value_ids" widget="many2many_tags" domain="[('id', 'in', valid_product_attribute_value_ids)]" options="{'no_create': True}" attrs="{'column_invisible': [('parent.product_id', '!=', False)]}" groups="product.group_product_variant"/>
+                            <field name="operation_id" groups="mrp.group_mrp_routings" domain="[('routing_id', '=', parent.routing_id)]" options="{'no_quick_create':True,'no_create_edit':True}"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

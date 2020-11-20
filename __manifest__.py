@@ -36,7 +36,7 @@
     'report/product_template_templates_inherit.xml',
     'report/purchase_order_templates_inherit.xml',
     'report/product_reports_inherit.xml',
-    # 'report/mrp_report_bom_structure_inherit.xml',
+    'report/mrp_report_bom_structure_inherit.xml',
     'data/sequence.xml',
   ],
   'qweb': [

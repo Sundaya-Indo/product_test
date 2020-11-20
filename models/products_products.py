@@ -77,6 +77,7 @@ class ProductAudit(models.Model):
     product_id = fields.Many2one('product.product', related='order_line.product_id', string='Product', readonly=False)
     company_id = fields.Many2one('res.company', 'Company', required=True, index=True, states=READONLY_STATES, default=lambda self: self.env.user.company_id.id)
     date_done = fields.Date('Date Finished', readonly=1, index=True, copy=False, store=True,)
+    product_tmpl_id = fields.Many2one('product.template')
 
     @api.multi
     def button_approve(self, force=False):

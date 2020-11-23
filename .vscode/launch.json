@@ -12,7 +12,7 @@
             "request": "launch",
             "stopOnEntry": false,
             "console": "integratedTerminal",
-            "pythonPath": "C:/Program Files (x86)/Odoo 12.0/python/python.exe",
+            "python": "C:/Program Files (x86)/Odoo 12.0/python/python.exe",
             "program": "C:/Program Files (x86)/Odoo 12.0/server/odoo-bin",
             "args": [
                 "--config=D:\\jarvis\\ikea\\server.conf",

@@ -23,8 +23,8 @@
                                 <table width="100%" class="o_mrp_bom_expandable">
                                     <thead>
                                         <tr>
-                                            <th>Image</th>
                                             <th>Product</th>
+                                            <th>Image</th>
                                             <th>BoM</th>
                                             <th class="text-right">BoM Quantity</th>
                                             <th class="text-right">To Consume</th>
@@ -40,11 +40,14 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <img t-if="data['image']" t-att-src="image_data_uri(data['image'])" style="border: 1px solid !important;"/>
+                                                <img t-if="data['image']" t-att-src="image_data_uri(data['image'])"/>
                                             </td>
                                             <td>
                                                 <span><a href="#" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['product'].id" t-att-data-model="'product.product'" class="o_mrp_bom_action"><t t-esc="data['bom_prod_name']"/></a><t t-else="" t-esc="data['bom_prod_name']"/></span>
                                             </td>
+                                            <!-- <td>
+                                                <img t-if="data['image']" t-att-src="image_data_uri(data['image'])"/>
+                                            </td> -->
                                             <td>
                                                 <span><a href="#" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['bom'].id" t-att-data-model="'mrp.bom'" class="o_mrp_bom_action"><t t-esc="data['code']"/></a><t t-else="" t-esc="data['code']"/></span>
                                             </td>
@@ -78,15 +81,21 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <td class="text-right"><span><strong>In Stock Value</strong></span></td>
-                                            <!-- <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
-                                                <span><t t-esc="l['qty_available']*l['prod_price']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
-                                            </td> -->
-                                            <td class="text-right"><span><strong>Unit Cost</strong></span></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <!-- <td class="text-right"><span><strong>In Stock Value</strong></span></td> -->
+                                            <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
+                                                <span><t t-esc="data['total_svalue']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
+                                            </td>
+                                            <!-- <td class="text-right"><span><strong>Unit Cost</strong></span></td>
                                             <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
                                                 <span><t t-esc="data['total']/data['bom_qty']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
-                                            </td>
-                                            <td class="text-right"><span><strong>Total Cost</strong></span></td>
+                                            </td> -->
+                                            <!-- <td class="text-right"><span><strong>Total Cost</strong></span></td> -->
                                             <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
                                                 <span><t t-esc="data['total']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
                                             </td>
@@ -114,16 +123,20 @@
                         <t t-if="l['child_bom']">
                             <span t-att-data-function="'get_bom'" class="o_mrp_bom_unfoldable fa fa-fw fa-caret-right" role="img" aria-label="Unfold" title="Unfold"/>
                         </t>
+                        <!-- <span t-att-class="None if l['child_bom'] else 'o_mrp_bom_no_fold'">
+                            <a href="#" t-att-data-res-id="l['prod_id']" t-att-data-model="'product.product'" class="o_mrp_bom_action"><t t-esc="l['prod_name']"/></a>
+                        </span> -->
                         <span t-att-class="None if l['child_bom'] else 'o_mrp_bom_no_fold'">
-                            <img t-if="l['image']" t-att-src="image_data_uri(l['image'])" style="border: 1px solid !important;"/>
+                            <img t-if="l['image']" t-att-src="image_data_uri(l['image'])"/>
                         </span>
                     </td>
                     <td>
-                        <!-- <span t-att-style="space_td"/>
-                        <span t-att-class="None if l['child_bom'] else 'o_mrp_bom_no_fold'"> -->
                         <span>
                             <a href="#" t-att-data-res-id="l['prod_id']" t-att-data-model="'product.product'" class="o_mrp_bom_action"><t t-esc="l['prod_name']"/></a>
                         </span>
+                        <!-- <span>
+                            <img t-if="l['image']" t-att-src="image_data_uri(l['image'])"/>
+                        </span> -->
                         <t t-if="l['phantom_bom']">
                             <span class="fa fa-dropbox" title="This is a BoM of type Kit!" role="img" aria-label="This is a BoM of type Kit!"/>
                         </t>

@@ -61,12 +61,13 @@ class ReportBomStructure(models.AbstractModel):
             'image': product.image_small,
             'qty_available': product.qty_available,
             'product_qty': bom.product_qty,
-            'stock_value': product.qty_available * product.standard_price,
-            # 'total_svalue': sum(),
+            'stock_value': round(product.qty_available) * round(product.standard_price),
+            'item_code': product.barcode,
         }
-        components, total = self._get_bom_lines(bom, bom_quantity, product, line_id, level)
+        components, total, total_svalue = self._get_bom_lines(bom, bom_quantity, product, line_id, level)
         lines['components'] = components
         lines['total'] += total
+        lines['total_svalue'] = total_svalue
         return lines
 
     def _get_bom_lines(self, bom, bom_quantity, product, line_id, level):
@@ -102,9 +103,11 @@ class ReportBomStructure(models.AbstractModel):
                 'qty_available': line.product_id.qty_available,
                 'prod_price': line.product_id.standard_price,
                 'product_qty': line.product_qty,
-                'stock_value': line.product_id.qty_available * line.product_id.standard_price
+                'stock_value': line.product_id.qty_available * line.product_id.standard_price,
+                'item_code': line.product_id.barcode,
 
             })
             total += sub_total
-        return components, total
+        components_stock_value = sum([component.get('stock_value') for component in components])
+        return components, total, components_stock_value
 

@@ -23,9 +23,10 @@
                                 <table width="100%" class="o_mrp_bom_expandable">
                                     <thead>
                                         <tr>
-                                            <th>Product</th>
                                             <th>Image</th>
+                                            <th>Product</th>
                                             <th>BoM</th>
+                                            <!-- <th>Test</th> -->
                                             <th class="text-right">BoM Quantity</th>
                                             <th class="text-right">To Consume</th>
                                             <th class="text-right">Stock</th>
@@ -34,16 +35,18 @@
                                             <th t-if="data['report_structure'] != 'bom_cost'" class="o_mrp_prod_cost text-right" title="This is the cost defined on the product.">Product Cost</th>
                                             <th t-if="data['report_structure'] != 'bom_cost'" class="o_mrp_prod_cost text-right">In Stock Value</th>
                                             <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right" title="This is the cost based on the BoM of the product. It is computed by summing the costs of the components and operations needed to build the product.">BoM Cost</th>
-                                            <th t-if="data['report_type'] == 'html' and data['has_attachments']" class="o_mrp_has_attachments" title="Files attached to the product">Attachments</th>
+                                            <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_has_attachments" title="Files attached to the product">Attachments</th>
+                                            <!-- <th t-if="data['report_type'] == 'html' and data['has_attachments']" class="o_mrp_has_attachments" title="Files attached to the product">Attachments</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <img t-if="data['image']" t-att-src="image_data_uri(data['image'])"/>
+                                                <img t-if="data['image']" t-att-src="image_data_uri(data['image'])" t-options='{"widget": "image",}'/>
+                                                <!-- <span><a t-esc="data['product']"></a></span> -->
                                             </td>
                                             <td>
-                                                <span><a href="#" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['product'].id" t-att-data-model="'product.product'" class="o_mrp_bom_action"><t t-esc="data['bom_prod_name']"/></a><t t-else="" t-esc="data['bom_prod_name']"/></span>
+                                                <span><a t-attf-href="#id=#{data['link']}&amp;model=product.product&amp;view_type=form&amp;menu_id=209" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['product'].id" t-att-data-model="'product.product'" class="o_mrp_bom_action"><t t-esc="data['bom_prod_name']"/></a><t t-else="" t-esc="data['bom_prod_name']"/></span>
                                             </td>
                                             <!-- <td>
                                                 <img t-if="data['image']" t-att-src="image_data_uri(data['image'])"/>
@@ -65,7 +68,7 @@
                                             <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
                                                 <span><t t-esc="data['total']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
                                             </td>
-                                            <td t-if="data['report_type'] == 'html'">
+                                            <td>
                                                 <span>
                                                     <t t-if="data['attachments']">
                                                         <a href="#" role="button" t-att-data-res-id="data['attachments'].ids" t-att-data-model="'mrp.document'" class="o_mrp_show_attachment_action fa fa-fw o_button_icon fa-files-o"/>

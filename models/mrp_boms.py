@@ -29,6 +29,7 @@ class ReportBomStructure(models.AbstractModel):
     def _get_bom(self, bom_id=False, product_id=False, line_qty=False, line_id=False, level=False):
         bom = self.env['mrp.bom'].browse(bom_id)
         bom_quantity = line_qty
+        # pro_obj = self.pool.get('product.product').browse(cr,)
         if line_id:
             current_line = self.env['mrp.bom.line'].browse(int(line_id))
             bom_quantity = current_line.product_uom_id._compute_quantity(line_qty, bom.product_uom_id)
@@ -63,6 +64,7 @@ class ReportBomStructure(models.AbstractModel):
             'product_qty': bom.product_qty,
             'stock_value': round(product.qty_available) * round(product.standard_price),
             'item_code': product.barcode,
+            'link': product.id
         }
         components, total, total_svalue = self._get_bom_lines(bom, bom_quantity, product, line_id, level)
         lines['components'] = components

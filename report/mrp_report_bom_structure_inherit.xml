@@ -26,7 +26,7 @@
                                             <th>Image</th>
                                             <th>Product</th>
                                             <th>BoM</th>
-                                            <!-- <th>Test</th> -->
+                                            <th>Exploded View</th>
                                             <th class="text-right">BoM Quantity</th>
                                             <th class="text-right">To Consume</th>
                                             <th class="text-right">Stock</th>
@@ -53,6 +53,11 @@
                                             </td> -->
                                             <td>
                                                 <span><a href="#" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['bom'].id" t-att-data-model="'mrp.bom'" class="o_mrp_bom_action"><t t-esc="data['code']"/></a><t t-else="" t-esc="data['code']"/></span>
+                                            </td>
+                                            <td>
+                                                <!-- <t t-set="image_resize" t-value="'width: '+ '60' + 'px;'"/> -->
+                                                <!-- <img t-if="data['link']" t-att-src="image_data_uri(data['link'])" t-att-style="image_resize" t-attf-href="#/web/content/product.product/#{data['link']}/exploded_image"/> -->
+                                                <a t-if="data['link']" t-attf-href="/web/content/product.product/#{data['link']}/exploded_image" target="popup" onclick="window.open('/web/content/product.product/38/exploded_image');">Link</a>
                                             </td>
                                             <td class="text-right"><span><t t-esc="data['product_qty']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span></td>
                                             <td class="text-right"><span><t t-esc="data['bom_qty']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span></td>

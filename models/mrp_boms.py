@@ -64,7 +64,7 @@ class ReportBomStructure(models.AbstractModel):
             'product_qty': bom.product_qty,
             'stock_value': round(product.qty_available) * round(product.standard_price),
             'item_code': product.barcode,
-            'link': product.id
+            'link': product.id,
         }
         components, total, total_svalue = self._get_bom_lines(bom, bom_quantity, product, line_id, level)
         lines['components'] = components

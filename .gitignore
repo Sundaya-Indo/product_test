@@ -9,3 +9,7 @@ models/__pycache__/ir_attachment.cpython-36.pyc
 models/__pycache__/product_templates.cpython-36.pyc
 models/__pycache__/product_templates.cpython-36.pyc
 .vscode/launch.json
+.vscode/launch.json
+models/__pycache__/__init__.cpython-36.pyc
+models/__pycache__/contact_template.cpython-36.pyc
+models/__pycache__/product_templates.cpython-36.pyc

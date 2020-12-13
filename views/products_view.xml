@@ -108,6 +108,16 @@
             </field>
         </record>
 
+        <record id="product_product_normal_form_views" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+                    <field name="exploded_image" widget='image'/>
+                </xpath>
+            </field>
+        </record>
+
         <record id="product_template_form_views" model="ir.ui.view">
             <field name="name">product_template_form_views</field>
             <field name="model">product.template</field>

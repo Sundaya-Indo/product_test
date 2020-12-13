@@ -2,6 +2,8 @@ from odoo import models, fields, api, tools, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons import decimal_precision as dp
 import datetime
+import requests
+import base64
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
@@ -17,6 +19,7 @@ class ProductProduct(models.Model):
     audit_qty = fields.Float('Audit Quantity')
     qty_dif = fields.Float('Difference', compute='generate_difference', store=True,)
     last_product_audit = fields.Date(string='Audit Date',)
+    exploded_image = fields.Binary(string='Exploded Image', attachment=False)
     
 
     @api.depends('weight', 'qty_available')
@@ -49,8 +52,7 @@ class ProductProduct(models.Model):
                 doc.price_meter = doc.standard_price / doc.length
             else:
                 pass
-
-
+                      
 
 class ProductAudit(models.Model):
     _name = 'product.audit'

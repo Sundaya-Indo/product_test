@@ -46,18 +46,20 @@
                                                 <!-- <span><a t-esc="data['product']"></a></span> -->
                                             </td>
                                             <td>
-                                                <span><a t-attf-href="#id=#{data['link']}&amp;model=product.product&amp;view_type=form&amp;menu_id=209" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['product'].id" t-att-data-model="'product.product'" class="o_mrp_bom_action"><t t-esc="data['bom_prod_name']"/></a><t t-else="" t-esc="data['bom_prod_name']"/></span>
+                                                <span><a t-attf-href="#" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['product'].id" t-att-data-model="'product.product'" class="o_mrp_bom_action"><t t-esc="data['bom_prod_name']"/></a><t t-else="" t-esc="data['bom_prod_name']"/></span>
                                             </td>
                                             <!-- <td>
                                                 <img t-if="data['image']" t-att-src="image_data_uri(data['image'])"/>
                                             </td> -->
                                             <td>
-                                                <span><a href="#" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['bom'].id" t-att-data-model="'mrp.bom'" class="o_mrp_bom_action"><t t-esc="data['code']"/></a><t t-else="" t-esc="data['code']"/></span>
+                                                <span><a href="#" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['bom'].id" t-att-data-model="'mrp.bom'" class="o_mrp_bom_action"><t t-esc="data['code']"/></a></span>
                                             </td>
                                             <td>
-                                                <!-- <t t-set="image_resize" t-value="'width: '+ '60' + 'px;'"/> -->
-                                                <!-- <img t-if="data['link']" t-att-src="image_data_uri(data['link'])" t-att-style="image_resize" t-attf-href="#/web/content/product.product/#{data['link']}/exploded_image"/> -->
-                                                <a t-if="data['link']" t-attf-href="/web/content/product.product/#{data['link']}/exploded_image" target="popup" onclick="window.open('/web/content/product.product/38/exploded_image');">Link</a>
+                                                <div t-esc="data['link']" id="link_img" style="display: none;"></div><a t-if="data['link']" style="cursor: pointer;color: #7C7BAD;" target="popup" onclick="(function(){
+                                                    var link = document.getElementById('link_img');
+                                                    link = link.innerText;
+                                                    window.open(`/web/content/product.product/${link}/exploded_image`,'newwindow','width=1000');
+                                                    return false;})();return false;">Link</a>
                                             </td>
                                             <td class="text-right"><span><t t-esc="data['product_qty']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span></td>
                                             <td class="text-right"><span><t t-esc="data['bom_qty']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span></td>

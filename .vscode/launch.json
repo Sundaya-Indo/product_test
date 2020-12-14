@@ -12,13 +12,13 @@
             "request": "launch",
             "stopOnEntry": false,
             "console": "integratedTerminal",
-            "pythonPath": "C:/Program Files (x86)/Odoo 12.0/python/python.exe",
+            "python": "C:/Program Files (x86)/Odoo 12.0/python/python.exe",
             "program": "C:/Program Files (x86)/Odoo 12.0/server/odoo-bin",
             "args": [
-                "--config=D:\\Project\\odoo\\server.conf",
+                "--config=D:\\jarvis\\ikea\\server.conf",
                 // "--config=C:\\Program Files (x86)\\Odoo 12.0\\server\\odoo.conf",
-                "--addons-path=D:\\Project\\repo",
-                "--database=Test",
+                "--addons-path=D:\\jarvis\\sundaya",
+                "--database=sundaya-clean-backup",
                 "--update=product_test"
             ]
         }

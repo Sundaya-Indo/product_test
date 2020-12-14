@@ -113,3 +113,4 @@ class ReportBomStructure(models.AbstractModel):
         components_stock_value = sum([component.get('stock_value') for component in components])
         return components, total, components_stock_value
 
+

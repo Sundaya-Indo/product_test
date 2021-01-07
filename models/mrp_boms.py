@@ -245,7 +245,7 @@ class ReportBomStructure(models.AbstractModel):
                 'link': product.id,
             }
             # components, total, total_svalue, components_list, build_data, sorting_data = self._get_bom_lines(bom, bom_quantity, product, line_id, level)
-            components, total, total_svalue, = self._get_bom_lines(bom, bom_quantity, product, line_id, level)
+            components, total, total_svalue = self._get_bom_lines(bom, bom_quantity, product, line_id, level)
             lines['components'] = components
             lines['total'] += total
             lines['total_svalue'] = total_svalue
@@ -294,6 +294,7 @@ class ReportBomStructure(models.AbstractModel):
                 'product_qty': line.product_qty,
                 'stock_value': line.product_id.qty_available * line.product_id.standard_price,
                 'item_code': line.product_id.barcode,
+                'link': line.product_id.id,
 
             })
             total += sub_total
@@ -323,9 +324,25 @@ class ReportBomStructure(models.AbstractModel):
         if isinstance(components, dict):
             components = components.get('components')
         for item in components:
-            list_bom.append({'level': level, 'name': item["prod_name"], 'child_bom':item["child_bom"], 'parent_id': item['parent_id']})
+            line_quantity = item['prod_qty'] * item['product_qty']
+            list_bom.append({
+                'level': level, 
+                'name': item["prod_name"], 
+                'child_bom':item["child_bom"], 
+                'parent_id': item['parent_id'],
+                'image_id': item['image'],
+                'link': item['link'],
+                'product_qty': item['product_qty'],
+                'prod_qty': line_quantity,
+                'qty_available': item['qty_available'],
+                'prod_uom': item['prod_uom'],
+                'prod_price': item['prod_price'],
+                'stock_value': item['stock_value'],
+                'total': item['total'],
+            })
             if item["child_bom_data"]:
                 self._build_data(item["child_bom_data"], list_bom, level)
+
         return list_bom
 
     def _get_parent(self, data, parent_id):
@@ -336,26 +353,6 @@ class ReportBomStructure(models.AbstractModel):
     def _sorting_data(self, components):
         data = self._build_data(components, arr = [])
         data.sort(key=lambda key: key.get('level'))
-    #     max_level = max([d.get('level') for d in data])
-    #     result_list = []
-    #     level_list = [[d for d in data if d.get('level') == lvl] for lvl in range(1, max_level+1)]
-    #     new_list = level_list.copy()
-    #     level_list.insert(0, [{'name': 0, 'level': 0, 'child_bom': level_list[0][0]['parent_id']}])
-    #     for level in level_list:
-    #         data_list= []
-    #         for lvl in level:
-    #             data_child_list = []
-    #             for new in new_list:
-    #                 for n in new:
-    #                     if lvl['child_bom']:
-    #                         cond1 = lvl['child_bom'] == n['parent_id']
-    #                         cond2 = (lvl['level'] + 1) == n['level']
-    #                         if cond1 and cond2:
-    #                             data_child_list.append(n)
-    #             if lvl['child_bom']:
-    #                 lvl.update({'level': lvl.get('level') + 1})
-    #                 result_list.append({**lvl, "child": data_child_list})
-    #     return result_list
         tmpParentId = data[0]["parent_id"]
         arr = []
         obj = {'name': None, 'level': None, 'child': []}

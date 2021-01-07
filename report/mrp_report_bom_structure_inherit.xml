@@ -20,22 +20,23 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="mt16">
-                                <table width="100%" class="o_mrp_bom_expandable">
+                                <input class="o_input o_mrp_bom_report_qty" min="1" step="any" value="1" type="number"/>
+                                <table width="100%" class="o_mrp_bom_expandable" style="margin-bottom: 30px;">
                                     <thead>
                                         <tr>
-                                            <th>Image</th>
-                                            <th>Product</th>
-                                            <th>BoM</th>
-                                            <th>Exploded View</th>
-                                            <th class="text-right">BoM Quantity</th>
-                                            <th class="text-right">To Consume</th>
-                                            <th class="text-right">Stock</th>
-                                            <th class="text-right">Availability</th>
-                                            <th class="text-left" groups="uom.group_uom">Unit of Measure</th>
-                                            <th t-if="data['report_structure'] != 'bom_cost'" class="o_mrp_prod_cost text-right" title="This is the cost defined on the product.">Product Cost</th>
-                                            <th t-if="data['report_structure'] != 'bom_cost'" class="o_mrp_prod_cost text-right">In Stock Value</th>
-                                            <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right" title="This is the cost based on the BoM of the product. It is computed by summing the costs of the components and operations needed to build the product.">BoM Cost</th>
-                                            <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_has_attachments" title="Files attached to the product">Attachments</th>
+                                            <th style="width: 85px;">Image</th>
+                                            <th style="width: 210px;">Product</th>
+                                            <!-- <th>BoM</th> -->
+                                            <th class="text-left" style="width: 113px;">Exploded View</th>
+                                            <th class="text-right" style="width: 106px;">BoM Quantity</th>
+                                            <th class="text-right" style="width: 98px;">To Consume</th>
+                                            <th class="text-right" style="width: 110px;">Stock</th>
+                                            <th class="text-right" style="width: 88px;">Availability</th>
+                                            <th class="text-left" style="width: 120px;" groups="uom.group_uom">Unit of Measure</th>
+                                            <th t-if="data['report_structure'] != 'bom_cost'" class="o_mrp_prod_cost text-right" style="width: 150px;" title="This is the cost defined on the product.">Product Cost</th>
+                                            <th t-if="data['report_structure'] != 'bom_cost'" class="o_mrp_prod_cost text-right" style="width: 150px;">In Stock Value</th>
+                                            <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right" style="width: 150px;" title="This is the cost based on the BoM of the product. It is computed by summing the costs of the components and operations needed to build the product.">BoM Cost</th>
+                                            <!-- <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_has_attachments" title="Files attached to the product">Attachments</th> -->
                                             <!-- <th t-if="data['report_type'] == 'html' and data['has_attachments']" class="o_mrp_has_attachments" title="Files attached to the product">Attachments</th> -->
                                         </tr>
                                     </thead>
@@ -43,18 +44,14 @@
                                         <tr>
                                             <td>
                                                 <img t-if="data['image']" t-att-src="image_data_uri(data['image'])" t-options='{"widget": "image",}'/>
-                                                <!-- <span><a t-esc="data['product']"></a></span> -->
                                             </td>
-                                            <td>
+                                            <td style="width: 210px;">
                                                 <span><a t-attf-href="#" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['product'].id" t-att-data-model="'product.product'" class="o_mrp_bom_action"><t t-esc="data['bom_prod_name']"/></a><t t-else="" t-esc="data['bom_prod_name']"/></span>
                                             </td>
                                             <!-- <td>
-                                                <img t-if="data['image']" t-att-src="image_data_uri(data['image'])"/>
-                                            </td> -->
-                                            <td>
                                                 <span><a href="#" t-if="data['report_type'] == 'html'" t-att-data-res-id="data['bom'].id" t-att-data-model="'mrp.bom'" class="o_mrp_bom_action"><t t-esc="data['code']"/></a></span>
-                                            </td>
-                                            <td>
+                                            </td> -->
+                                            <td style="padding-left: 10px;">
                                                 <div t-esc="data['link']" id="link_img" style="display: none;"></div><a t-if="data['link']" style="cursor: pointer;color: #7C7BAD;" target="popup" onclick="(function(){
                                                     var link = document.getElementById('link_img');
                                                     link = link.innerText;
@@ -75,13 +72,13 @@
                                             <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
                                                 <span><t t-esc="data['total']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
                                             </td>
-                                            <td>
+                                            <!-- <td t-if="data['report_type'] == 'html'">
                                                 <span>
                                                     <t t-if="data['attachments']">
                                                         <a href="#" role="button" t-att-data-res-id="data['attachments'].ids" t-att-data-model="'mrp.document'" class="o_mrp_show_attachment_action fa fa-fw o_button_icon fa-files-o"/>
                                                     </t>
                                                 </span>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                         <t t-if="data['report_type'] == 'html'" t-call="mrp.report_mrp_bom_line"/>
                                         <t t-if="data['report_type'] == 'pdf'" t-call="mrp.report_mrp_bom_pdf_line"/>
@@ -97,18 +94,12 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <!-- <td class="text-right"><span><strong>In Stock Value</strong></span></td> -->
-                                            <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
+                                            <!-- <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
                                                 <span><t t-esc="data['total_svalue']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
                                             </td>
-                                            <!-- <td class="text-right"><span><strong>Unit Cost</strong></span></td>
-                                            <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
-                                                <span><t t-esc="data['total']/data['bom_qty']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
-                                            </td> -->
-                                            <!-- <td class="text-right"><span><strong>Total Cost</strong></span></td> -->
                                             <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
                                                 <span><t t-esc="data['total']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -124,7 +115,7 @@
     </template>
 
     <template id="report_mrp_bom_line_inherit" inherit_id="mrp.report_mrp_bom_line">
-        <xpath expr="//t[@t-as='l']" position="replace">
+       <!--  <xpath expr="//t[@t-as='l']" position="replace">
             <t t-foreach="data['components']" t-as="l">
                 <t t-set="space_td" t-value="'margin-left: '+ str(l['level'] * 20) + 'px;'"/>
                 <tr class="o_mrp_bom_report_line" t-att-data-id="l['child_bom']" t-att-parent_id="l['parent_id']" t-att-data-line="l['line_id']" t-att-data-product_id="l['prod_id']" t-att-data-qty="l['prod_qty']" t-att-data-level="l['level']">
@@ -133,20 +124,15 @@
                         <t t-if="l['child_bom']">
                             <span t-att-data-function="'get_bom'" class="o_mrp_bom_unfoldable fa fa-fw fa-caret-right" role="img" aria-label="Unfold" title="Unfold"/>
                         </t>
-                        <!-- <span t-att-class="None if l['child_bom'] else 'o_mrp_bom_no_fold'">
-                            <a href="#" t-att-data-res-id="l['prod_id']" t-att-data-model="'product.product'" class="o_mrp_bom_action"><t t-esc="l['prod_name']"/></a>
-                        </span> -->
                         <span t-att-class="None if l['child_bom'] else 'o_mrp_bom_no_fold'">
                             <img t-if="l['image']" t-att-src="image_data_uri(l['image'])"/>
                         </span>
+                        <t t-esc="l['child_bom_data']"/>
                     </td>
                     <td>
                         <span>
                             <a href="#" t-att-data-res-id="l['prod_id']" t-att-data-model="'product.product'" class="o_mrp_bom_action"><t t-esc="l['prod_name']"/></a>
                         </span>
-                        <!-- <span>
-                            <img t-if="l['image']" t-att-src="image_data_uri(l['image'])"/>
-                        </span> -->
                         <t t-if="l['phantom_bom']">
                             <span class="fa fa-dropbox" title="This is a BoM of type Kit!" role="img" aria-label="This is a BoM of type Kit!"/>
                         </t>
@@ -179,6 +165,83 @@
                     </td>
                 </tr>
             </t>
+        </xpath> -->
+        
+        <xpath expr="//t[@t-as='l']" position="replace">
+                <t t-foreach="data['sorting_data']" t-as="l">
+                    <!-- <span>Parent : <t t-esc="l['name']" /></span>
+                    <br></br>
+                    <span>Level : <t t-esc="l['level']" /></span> -->
+                    <table width="100%" class="o_mrp_bom_expandable" style="margin-bottom: 30px;" >
+                    <t t-if="l['name']"><span>Parent : <t t-esc="l['name']" /></span></t>
+                    <t t-else=""><span>Parent : <t t-esc="data['code']"/></span></t>
+                    <br></br>
+                    <t t-if="l['level']"><span>Level : <t t-esc="l['level']" /></span></t>
+                    <t t-else=""><span>Level : 1</span></t>
+                        <thead>
+                            <tr>
+                                <th style="width: 85px;">Image</th>
+                                <th style="width: 210px;">Product</th>
+                                <th class="text-left" style="width: 113px;">Exploded View</th>
+                                <th class="text-right" style="width: 106px;">BoM Quantity</th>
+                                <th class="text-right" style="width: 98px;">To Consume</th>
+                                <th class="text-right" style="width: 110px;">Stock</th>
+                                <th class="text-right" style="width: 88px;">Availability</th>
+                                <th class="text-left" style="width: 120px;">Unit of Measure</th>
+                                <th class="o_mrp_prod_cost text-right" style="width: 150px;">Product Cost</th>
+                                <th class="o_mrp_prod_cost text-right" style="width: 150px;">in Stock Value</th>
+                                <th class="o_mrp_prod_cost text-right" style="width: 150px;">BoM Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="l['child']" t-as="c">
+                                <tr class="o_mrp_bom_report_line">
+                                    <td>
+                                        <img t-if="c['image_id']" t-att-src="image_data_uri(c['image_id'])"/>
+                                    </td>
+                                    <td style="padding-left: 10px; width: 210px;">
+                                        <a><t t-esc="c['name']"/></a>
+                                    </td>
+                                    <td style="padding-left: 10px;">
+                                        <div t-esc="c['link']" id="link_img2" style="display: none;"></div><a t-if="c['link']" style="cursor: pointer;color: #7C7BAD;" target="popup" onclick="(function(){
+                                            var link2 = document.getElementById('link_img2');
+                                            link2 = link2.innerText;
+                                            window.open(`/web/content/product.product/${link2}/exploded_image`,'newwindow','width=1000');
+                                            return false;})();return false;">Link</a>
+                                    </td>
+                                    <td class="text-right">
+                                        <span>
+                                            <t t-esc="c['product_qty']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+                                        </span>
+                                    </td>
+                                    <td class="text-right">
+                                        <span><t t-esc="c['prod_qty']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span>
+                                    </td>
+                                    <td class="text-right">
+                                        <span><t t-esc="c['qty_available']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span>
+                                    </td>
+                                    <td class="text-right">
+                                        <span><t t-esc="c['qty_available']-c['prod_qty']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span>
+                                    </td>
+                                    <td groups="uom.group_uom">
+                                        <span><t t-esc="c['prod_uom']"/></span>
+                                    </td>
+                                    <td class="o_mrp_prod_cost text-right">
+                                        <span t-esc="c['prod_price']" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                    <td class="o_mrp_prod_cost text-right">
+                                        <span t-esc="c['stock_value']" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                    <td class="o_mrp_bom_cost text-right">
+                                        <span t-esc="c['total']" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+                <!-- <t t-esc="data['sorting_data']"/> -->
         </xpath>
+    
     </template>
 </odoo>

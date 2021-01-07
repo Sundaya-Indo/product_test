@@ -26,185 +26,7 @@ class ReportBomStructure(models.AbstractModel):
 
     product_id = fields.Many2one('product.product', 'Product D')
 
-    @api.model
-    def get_bom(self, bom_id=False, product_id=False, line_qty=False, line_id=False, level=False):
-        lines = self._get_bom(bom_id=bom_id, product_id=product_id, line_qty=line_qty, line_id=line_id, level=level)
-        return self.env.ref('mrp.report_mrp_bom_line').render({'data': lines})
-
-    @api.model
-    def _get_report_data(self, bom_id, searchQty=0, searchVariant=False):
-        lines = {}
-        bom = self.env['mrp.bom'].browse(bom_id)
-        bom_quantity = searchQty or bom.product_qty
-        bom_product_variants = {}
-        bom_uom_name = ''
-
-        if bom:
-            bom_uom_name = bom.product_uom_id.name
-
-            # Get variants used for search
-            if not bom.product_id:
-                for variant in bom.product_tmpl_id.product_variant_ids:
-                    bom_product_variants[variant.id] = variant.display_name
-
-        lines = self._get_bom(bom_id, product_id=searchVariant, line_qty=bom_quantity, level=1)
-        # lines.update({'sorting_data': self._sorting_data(lines.get('components'))})
-        return {
-            'lines': lines,
-            'variants': bom_product_variants,
-            'bom_uom_name': bom_uom_name,
-            'bom_qty': bom_quantity,
-            'is_variant_applied': self.env.user.user_has_groups('product.group_product_variant') and len(bom_product_variants) > 1,
-            'is_uom_applied': self.env.user.user_has_groups('uom.group_uom')
-        }
-
     def _get_bom(self, bom_id=False, product_id=False, line_qty=False, line_id=False, level=False):
-        data_test = [
-            {
-                "name": None,
-                "level": None,
-                "child": [
-                {
-                    "level": 1,
-                    "name": "DC Energy Meter IC",
-                    "child_bom": False,
-                    "parent_id": 1
-                },
-                {
-                    "level": 1,
-                    "name": "Chip Resistor (10R, +/- 1%)",
-                    "child_bom": False,
-                    "parent_id": 1
-                },
-                {
-                    "level": 1,
-                    "name": "Chip Capasitor (100uF)",
-                    "child_bom": False,
-                    "parent_id": 1
-                },
-                {
-                    "level": 1,
-                    "name": "Test Energy",
-                    "child_bom": 4,
-                    "parent_id": 1
-                },
-                {
-                    "level": 1,
-                    "name": "Test Voltage",
-                    "child_bom": 7,
-                    "parent_id": 1
-                }
-                ]
-            },
-            {
-                "child": [
-                {
-                    "level": 2,
-                    "name": "AI",
-                    "child_bom": False,
-                    "parent_id": 4
-                },
-                {
-                    "level": 2,
-                    "name": "3pole Latch Relay",
-                    "child_bom": False,
-                    "parent_id": 4
-                },
-                {
-                    "level": 2,
-                    "name": "Test Meter",
-                    "child_bom": 5,
-                    "parent_id": 4
-                }
-                ],
-                "name": "Test Energy",
-                "level": 2
-            },
-            {
-                "child": [
-                {
-                    "level": 2,
-                    "name": "ACP Mounting Beam",
-                    "child_bom": False,
-                    "parent_id": 7
-                },
-                {
-                    "level": 2,
-                    "name": "15x2mm Strip Profile",
-                    "child_bom": False,
-                    "parent_id": 7
-                }
-                ],
-                "name": "Test Voltage",
-                "level": 2
-            },
-            {
-                "child": [
-                {
-                    "level": 3,
-                    "name": "BMS",
-                    "child_bom": False,
-                    "parent_id": 5
-                },
-                {
-                    "level": 3,
-                    "name": "Battery Casing",
-                    "child_bom": False,
-                    "parent_id": 5
-                },
-                {
-                    "level": 3,
-                    "name": "Test Power",
-                    "child_bom": 6,
-                    "parent_id": 5
-                }
-                ],
-                "name": "Test Meter",
-                "level": 3
-            },
-            {
-                "child": [
-                {
-                    "level": 4,
-                    "name": "15x2mm Strip Profile",
-                    "child_bom": False,
-                    "parent_id": 6
-                },
-                {
-                    "level": 4,
-                    "name": "AI",
-                    "child_bom": False,
-                    "parent_id": 6
-                },
-                {
-                    "level": 4,
-                    "name": "Test Voltage",
-                    "child_bom": 7,
-                    "parent_id": 6
-                }
-                ],
-                "name": "Test Power",
-                "level": 4
-            },
-            {
-                "child": [
-                {
-                    "level": 5,
-                    "name": "ACP Mounting Beam",
-                    "child_bom": False,
-                    "parent_id": 7
-                },
-                {
-                    "level": 5,
-                    "name": "15x2mm Strip Profile",
-                    "child_bom": False,
-                    "parent_id": 7
-                }
-                ],
-                "name": "Test Voltage",
-                "level": 5
-            }
-            ]
         bom = self.env['mrp.bom'].browse(bom_id)
         bom_quantity = line_qty
         if line_id:
@@ -244,17 +66,11 @@ class ReportBomStructure(models.AbstractModel):
                 'item_code': product.barcode,
                 'link': product.id,
             }
-            # components, total, total_svalue, components_list, build_data, sorting_data = self._get_bom_lines(bom, bom_quantity, product, line_id, level)
             components, total, total_svalue = self._get_bom_lines(bom, bom_quantity, product, line_id, level)
             lines['components'] = components
             lines['total'] += total
             lines['total_svalue'] = total_svalue
-            # lines['components_list'] = components_list
-            # lines['build_data'] = self._build_data(components)
-            lines['test_data'] = data_test
-            lines['sorting_data'] = self._sorting_data(components)
-            # build_data = self._build_data(components)
-            # lines['transform'] = self._transform_data(components)
+            lines['sorting_data'] = self._sorting_data(components, lines.get('bom_qty'))
             return lines
         return None
 
@@ -299,32 +115,15 @@ class ReportBomStructure(models.AbstractModel):
             })
             total += sub_total
         components_stock_value = sum([component.get('stock_value') for component in components])
-        # components_list = self._transform_data(components)
-        # build_data = self._build_data(components)
-        # sorting_data = self._sorting_data(components)
-        # transform_data = self._transform_data(components)
     
         return components, total, components_stock_value,
-        # return components, total, components_stock_value, components_list, build_data, sorting_data,
 
-    # def _transform_data(self, components):
-    #     list_data = []
-    #     for component in components:
-    #         child_bom_data = component.get('child_bom_data')
-    #         if child_bom_data is not None:
-    #             component_data = self._transform_data(child_bom_data.get('components'))
-    #         else:
-    #             component_data = False
-    #         list_data.append([child_bom_data, component_data])
-    #     return list_data
-
-    def _build_data(self, components, arr = [], level = 0):
+    def _build_data(self, components, arr=[], level=0):
         level += 1
         list_bom = arr
         if isinstance(components, dict):
             components = components.get('components')
         for item in components:
-            line_quantity = item['prod_qty'] * item['product_qty']
             list_bom.append({
                 'level': level, 
                 'name': item["prod_name"], 
@@ -333,7 +132,7 @@ class ReportBomStructure(models.AbstractModel):
                 'image_id': item['image'],
                 'link': item['link'],
                 'product_qty': item['product_qty'],
-                'prod_qty': line_quantity,
+                'prod_qty': item['prod_qty'],
                 'qty_available': item['qty_available'],
                 'prod_uom': item['prod_uom'],
                 'prod_price': item['prod_price'],
@@ -350,7 +149,7 @@ class ReportBomStructure(models.AbstractModel):
             if data[d]["child_bom"] == parent_id:
                 return data[d]
 
-    def _sorting_data(self, components):
+    def _sorting_data(self, components, bom_qty):
         data = self._build_data(components, arr = [])
         data.sort(key=lambda key: key.get('level'))
         tmpParentId = data[0]["parent_id"]
@@ -358,6 +157,8 @@ class ReportBomStructure(models.AbstractModel):
         obj = {'name': None, 'level': None, 'child': []}
         arrParent = []
         for d in range(len(data)):
+            data[d]['prod_qty'] = data[d]['product_qty'] * bom_qty
+            data[d]['total'] = data[d]['prod_qty'] * data[d]['prod_price']
             if data[d]["child_bom"]:
                 arrParent.append(data[d])
             if tmpParentId == data[d]["parent_id"]:

@@ -70,7 +70,7 @@ class ReportBomStructure(models.AbstractModel):
             lines['components'] = components
             lines['total'] += total
             lines['total_svalue'] = total_svalue
-            lines['sorting_data'] = self._sorting_data(components, lines.get('bom_qty'))
+            lines['sorting_data'] = self._sorting_data(components, lines.get('bom_qty'), lines.get('qty_available'))
             return lines
         return None
 
@@ -111,7 +111,7 @@ class ReportBomStructure(models.AbstractModel):
                 'stock_value': line.product_id.qty_available * line.product_id.standard_price,
                 'item_code': line.product_id.barcode,
                 'link': line.product_id.id,
-
+                'parent_qty': bom.product_tmpl_id.qty_available,
             })
             total += sub_total
         components_stock_value = sum([component.get('stock_value') for component in components])
@@ -138,6 +138,7 @@ class ReportBomStructure(models.AbstractModel):
                 'prod_price': item['prod_price'],
                 'stock_value': item['stock_value'],
                 'total': item['total'],
+                'parent_qty': item['parent_qty'],
             })
             if item["child_bom_data"]:
                 self._build_data(item["child_bom_data"], list_bom, level)
@@ -149,7 +150,7 @@ class ReportBomStructure(models.AbstractModel):
             if data[d]["child_bom"] == parent_id:
                 return data[d]
 
-    def _sorting_data(self, components, bom_qty):
+    def _sorting_data(self, components, bom_qty, qty_available):
         data = self._build_data(components, arr = [])
         data.sort(key=lambda key: key.get('level'))
         tmpParentId = data[0]["parent_id"]
@@ -157,8 +158,26 @@ class ReportBomStructure(models.AbstractModel):
         obj = {'name': None, 'level': None, 'child': []}
         arrParent = []
         for d in range(len(data)):
-            data[d]['prod_qty'] = data[d]['product_qty'] * bom_qty
-            data[d]['total'] = data[d]['prod_qty'] * data[d]['prod_price']
+            level1 = data[d]['product_qty'] * (bom_qty - qty_available)
+            # level2 = data[d]['product_qty'] * (level1 - data[d]['parent_qty'])
+            # level3 = data[d]['product_qty'] * (level2 - data[d]['parent_qty'])
+            if data[d]['level'] == 1:
+                data[d]['prod_qty'] = data[d]['product_qty'] * (bom_qty - qty_available)
+            if data[d]['level'] == 2:
+                data[d]['prod_qty'] = data[d]['product_qty'] * (level1 - data[d]['parent_qty'])
+                level2 = data[d]['prod_qty']
+            if data[d]['level'] == 3:
+                level3 = data[d]['product_qty'] * (level2 - data[d]['parent_qty'])
+                data[d]['prod_qty'] = level3
+                minus_qty = data[d]['qty_available'] - level3
+                bom_data = data[d]['child_bom']
+            if data[d]['level'] == 4:
+                data[d]['prod_qty'] = data[d]['product_qty'] * minus_qty
+
+            # for dat in data:
+            #     if data[d]['parent_id'] == dat['child_bom']:
+            #         data[d]['parent_consume'] = data[d]['product_qty'] * (dat['prod_qty'] - data[d]['parent_qty'])
+            data[d]['total'] = data[d]['prod_qty']
             if data[d]["child_bom"]:
                 arrParent.append(data[d])
             if tmpParentId == data[d]["parent_id"]:

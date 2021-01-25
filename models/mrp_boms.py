@@ -112,6 +112,9 @@ class ReportBomStructure(models.AbstractModel):
                 'item_code': line.product_id.barcode,
                 'link': line.product_id.id,
                 'parent_qty': bom.product_tmpl_id.qty_available,
+                'get_sap': line.product_id.product_tmpl_id.restock_type,
+                'action_ind': 0,
+                'parent_con': 0,
             })
             total += sub_total
         components_stock_value = sum([component.get('stock_value') for component in components])
@@ -139,6 +142,9 @@ class ReportBomStructure(models.AbstractModel):
                 'stock_value': item['stock_value'],
                 'total': item['total'],
                 'parent_qty': item['parent_qty'],
+                'get_sap': item['get_sap'],
+                'action_ind': item['action_ind'],
+                'parent_con': item['parent_con'],
             })
             if item["child_bom_data"]:
                 self._build_data(item["child_bom_data"], list_bom, level)
@@ -155,29 +161,14 @@ class ReportBomStructure(models.AbstractModel):
         data.sort(key=lambda key: key.get('level'))
         tmpParentId = data[0]["parent_id"]
         arr = []
-        obj = {'name': None, 'level': None, 'child': []}
+        obj = {'name': None, 'level': None, 'child': [], 'par_prod_qty': None,}
         arrParent = []
         for d in range(len(data)):
-            level1 = data[d]['product_qty'] * (bom_qty - qty_available)
-            # level2 = data[d]['product_qty'] * (level1 - data[d]['parent_qty'])
-            # level3 = data[d]['product_qty'] * (level2 - data[d]['parent_qty'])
-            if data[d]['level'] == 1:
-                data[d]['prod_qty'] = data[d]['product_qty'] * (bom_qty - qty_available)
-            if data[d]['level'] == 2:
-                data[d]['prod_qty'] = data[d]['product_qty'] * (level1 - data[d]['parent_qty'])
-                level2 = data[d]['prod_qty']
-            if data[d]['level'] == 3:
-                level3 = data[d]['product_qty'] * (level2 - data[d]['parent_qty'])
-                data[d]['prod_qty'] = level3
-                minus_qty = data[d]['qty_available'] - level3
-                bom_data = data[d]['child_bom']
-            if data[d]['level'] == 4:
-                data[d]['prod_qty'] = data[d]['product_qty'] * minus_qty
-
-            # for dat in data:
-            #     if data[d]['parent_id'] == dat['child_bom']:
-            #         data[d]['parent_consume'] = data[d]['product_qty'] * (dat['prod_qty'] - data[d]['parent_qty'])
-            data[d]['total'] = data[d]['prod_qty']
+            # level1 = data[d]['product_qty'] * (bom_qty - qty_available)  
+            if data[d]['level']:
+                data[d]['prod_qty'] = data[d]['product_qty'] * bom_qty
+            data[d]['total'] = data[d]['prod_qty'] * data[d]['prod_price']
+            data[d]['action_ind'] = data[d]['qty_available'] - data[d]['prod_qty'] 
             if data[d]["child_bom"]:
                 arrParent.append(data[d])
             if tmpParentId == data[d]["parent_id"]:
@@ -188,6 +179,7 @@ class ReportBomStructure(models.AbstractModel):
                     if parentData is not None:
                         obj["name"] = parentData["name"]
                         obj["level"] = data[d-1]["level"]
+                        obj["par_prod_qty"] = parentData["prod_qty"]
                 arr.append(obj)
                 obj = {'child': []}
                 obj["child"].append(data[d])
@@ -197,6 +189,8 @@ class ReportBomStructure(models.AbstractModel):
                 if parentData is not None:
                     obj["name"] = parentData["name"]
                     obj["level"] = data[d-1]["level"]
-                arr.append(obj)
+                    obj["par_prod_qty"] = parentData["prod_qty"]
+                arr.append(obj)  
         return arr
+    
         

@@ -59,6 +59,8 @@ class ProductTemplate(models.Model):
     audit_id = fields.Many2one('product.audit', store=True,)
     rel_audit_done = fields.Date(related='audit_id.date_done',)
 
+    restock_type = fields.Selection([ ('purchase', 'Purhcase'),('assembly', 'Assembly'),('set', 'Set'),],'Restock Type', default='purchase')
+
     @api.one
     @api.depends('barcode')
     def _generate_qr_code(self):

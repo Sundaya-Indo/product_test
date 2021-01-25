@@ -13,6 +13,7 @@
           <field name="sample_product"/>
           <field name="stock_product"/>
           <field name="asset_product"/>
+          <field name="restock_type"/>
         </xpath>
         <xpath expr="//field[@name='type']" position="before">
           <field name="long_desc"/>

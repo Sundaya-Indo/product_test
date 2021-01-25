@@ -20,7 +20,6 @@ class ProductProduct(models.Model):
     qty_dif = fields.Float('Difference', compute='generate_difference', store=True,)
     last_product_audit = fields.Date(string='Audit Date',)
     exploded_image = fields.Binary(string='Exploded Image', attachment=False)
-    
 
     @api.depends('weight', 'qty_available')
     def generate_total_weight(self):

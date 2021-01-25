@@ -36,6 +36,8 @@
                                             <th t-if="data['report_structure'] != 'bom_cost'" class="o_mrp_prod_cost text-right" style="width: 150px;" title="This is the cost defined on the product.">Product Cost</th>
                                             <th t-if="data['report_structure'] != 'bom_cost'" class="o_mrp_prod_cost text-right" style="width: 150px;">In Stock Value</th>
                                             <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right" style="width: 150px;" title="This is the cost based on the BoM of the product. It is computed by summing the costs of the components and operations needed to build the product.">BoM Cost</th>
+                                            <!-- <th class="o_mrp_prod_cost text-right" style="width: 150px;">SAP</th> -->
+                                            <th class="o_mrp_prod_cost text-left" style="width: 150px;">Action</th>
                                             <!-- <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_has_attachments" title="Files attached to the product">Attachments</th> -->
                                             <!-- <th t-if="data['report_type'] == 'html' and data['has_attachments']" class="o_mrp_has_attachments" title="Files attached to the product">Attachments</th> -->
                                         </tr>
@@ -136,6 +138,8 @@
                                 <th class="o_mrp_prod_cost text-right" style="width: 150px;">Product Cost</th>
                                 <th class="o_mrp_prod_cost text-right" style="width: 150px;">in Stock Value</th>
                                 <th class="o_mrp_prod_cost text-right" style="width: 150px;">BoM Cost</th>
+                                <!-- <th class="o_mrp_prod_cost text-left" style="width: 150px;">SAP</th> -->
+                                <th class="o_mrp_prod_cost text-left" style="width: 150px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -161,6 +165,17 @@
                                     </td>
                                     <td class="text-right">
                                         <span><t t-esc="c['prod_qty']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span>
+                                        <!-- <t t-if="l['prod_qty']!=None"><span><t t-esc="l['prod_qty'] - c['parent_qty']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span></t> -->
+                                        <!-- <t t-if="c['prod_qty']"><span><t t-esc="c['prod_qty']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span></t>
+                                        <t t-if="l['prod_qty']">
+                                            <t t-set="temp" t-value="l['prod_qty'] - c['parent_qty']"/>
+                                            <t t-if="temp&lt;0">
+                                                <span>0</span>
+                                            </t>
+                                            <t t-if="temp&gt;=0">
+                                                <span><t t-esc="temp" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span>
+                                            </t>
+                                        </t> -->
                                     </td>
                                     <td class="text-right">
                                         <span><t t-esc="c['qty_available']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/></span>
@@ -179,6 +194,13 @@
                                     </td>
                                     <td class="o_mrp_bom_cost text-right">
                                         <span t-esc="c['total']" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                    <!-- <td>
+                                        <span t-esc="c['get_sap']"/>
+                                    </td> -->
+                                    <td style="padding-left: 10px;">
+                                        <t t-if="c['action_ind']&lt;0"><button><span><t t-esc="c['get_sap']"/></span></button></t>
+                                        <t t-if="c['action_ind']&gt;=0"><span></span></t>
                                     </td>
                                 </tr>
                             </t>

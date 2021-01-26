@@ -48,7 +48,7 @@ class ReportBomStructure(models.AbstractModel):
             lines = {
                 'bom': bom,
                 'bom_qty': bom_quantity,
-                'bom_prod_name': product.display_name,
+                'bom_prod_name': product.name,
                 'currency': self.env.user.company_id.currency_id,
                 'product': product,
                 'code': bom and self._get_bom_reference(bom) or '',
@@ -90,7 +90,7 @@ class ReportBomStructure(models.AbstractModel):
             sub_total = self.env.user.company_id.currency_id.round(sub_total)
             components.append({
                 'prod_id': line.product_id.id,
-                'prod_name': line.product_id.display_name,
+                'prod_name': line.product_id.name,
                 'code': line.child_bom_id and self._get_bom_reference(line.child_bom_id) or '',
                 'prod_qty': line_quantity,
                 'prod_uom': line.product_uom_id.name,

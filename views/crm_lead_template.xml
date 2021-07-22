@@ -29,6 +29,9 @@
             <field name="model">crm.lead</field>
             <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="lead_ref" />
+                </xpath>
                 <xpath expr="//field[@name='team_id']" position="after">
                     <field class="dropdown_loc_status" name="marker_color_crm" widget="selection"/>   
                 </xpath>
@@ -110,6 +113,9 @@
                     <page string="Technical">
                         <group string="Ehub Information">
                             <field name="bbc_id" context="{'form_view_ref':'stock.view_production_lot_form'}"/>
+                        </group>
+                        <group string="Energy Info">
+                            <field name="harvest_rat"/>
                         </group>
                     </page>
                 </xpath>
@@ -413,6 +419,16 @@
                     </kanban>
                 </xpath>
             </field>
+        </record>
+
+        <record id="sequence_lead_ref" model="ir.sequence">
+            <field name="name">Lead Ref</field>
+            <field name="code">lead.ref</field>
+            <field name="active">TRUE</field>
+            <field name="prefix"></field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
         </record>
     </data>
 </odoo>

@@ -421,6 +421,18 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="crm_case_tree_view_oppor_new">
+            <field name="name">crm_case_tree_view_leads_new</field>
+            <field name="model">crm.lead</field>
+            <field name="priority" eval="1"/>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='create_date']" position="after">
+                    <field name="lead_ref"/>
+                </xpath>
+            </field>
+        </record>
+
         <record id="sequence_lead_ref" model="ir.sequence">
             <field name="name">Lead Ref</field>
             <field name="code">lead.ref</field>

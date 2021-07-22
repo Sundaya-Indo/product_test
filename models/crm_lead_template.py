@@ -23,7 +23,7 @@ class Leads(models.Model):
     sales_rep = fields.Many2one('res.partner', 'Sales Representative')
     technical_sup = fields.Many2one('res.partner', 'Technical Support')
     referred_by = fields.Many2one('res.partner', 'Referred By')
-    lead_ref = fields.Char(string="Lead Reference", readonly=True, required=True, copy=False, default=lambda self:_('New'), track_visibility='onchange')
+    lead_ref = fields.Char(string="Lead Reference", required=True, copy=False, default=lambda self:_('New'), track_visibility='onchange')
     @api.model
     def create(self, vals):
         if vals:
@@ -39,4 +39,4 @@ class Leads(models.Model):
         string='Ehub Serial'
         )
 
-    harvest_rat = fields.Float(string="Harvest Ratio")
+    harvest_rat = fields.Float(string="Harvest Ratio", digits=(2,1))
